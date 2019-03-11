@@ -1,0 +1,42 @@
+package com.bory.company.dao;
+
+import java.util.List;
+import java.util.Map;
+
+import com.bory.company.dto.Employee;
+
+public class CompanyDAOImpl implements CompanyDAO {
+
+	@Override
+	public int insert(Employee employeeBean) {
+		return 0;
+	}
+
+	@Override
+	public int update(Employee employeeBean) {
+		return 0;
+	}
+
+	@Override
+	public List<Employee> findAll() {
+		return null;
+	}
+
+	@Override
+	public List<Employee> findSome(Map<String, String> findOption) {
+		return null;
+	}
+
+	@Override
+	public List<Employee> findOne(String readOption) {
+		return null;
+	}
+
+	@Override
+	public int count() {
+		return 0;
+	}
+
+
+
+}

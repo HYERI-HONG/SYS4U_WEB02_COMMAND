@@ -1,0 +1,11 @@
+package com.bory.company.dao;
+
+import java.util.List;
+
+import com.bory.company.domain.EmployeeBean;
+
+public class CompanyDAOImpl {
+	
+	
+
+}

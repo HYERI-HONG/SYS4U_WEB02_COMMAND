@@ -1,0 +1,5 @@
+package com.bory.company.domain;
+
+public class EmployeeBean {
+
+}

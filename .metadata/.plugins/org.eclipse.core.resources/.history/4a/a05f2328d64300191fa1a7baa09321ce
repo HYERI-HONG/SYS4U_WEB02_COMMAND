@@ -1,0 +1,12 @@
+package com.bory.company.command;
+
+import java.sql.Connection;
+import javax.servlet.http.HttpServletRequest;
+
+public abstract class AbstractCommand implements Command{
+
+	
+	
+	
+	
+}

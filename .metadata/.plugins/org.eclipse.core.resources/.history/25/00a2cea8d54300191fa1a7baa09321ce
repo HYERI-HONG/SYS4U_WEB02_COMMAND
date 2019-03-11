@@ -1,0 +1,25 @@
+package com.bory.company.command;
+
+import java.sql.Connection;
+
+import javax.servlet.http.HttpServletRequest;
+
+public abstract class AbstractCommand implements Command{
+
+	protected Connection conn;
+
+	@Override
+	public void setConnection(Connection conn) {
+		this.conn = conn;
+	}
+	
+	protected String getParameter(HttpServletRequest request, String name, String defaultValue) {
+		
+		return (request.getParameter(name)==null? defaultValue : request.getParameter(name));
+		
+	}
+	
+	
+	
+	
+}

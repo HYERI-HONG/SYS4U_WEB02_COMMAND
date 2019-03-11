@@ -1,0 +1,26 @@
+package com.bory.company.dao;
+
+import java.util.List;
+
+import com.bory.company.domain.EmployeeBean;
+
+public class CompanyDAOImpl implements CompanyDAO {
+
+	@Override
+	public List<EmployeeBean> readAllEmployee() {
+		return null;
+	}
+
+	@Override
+	public List<EmployeeBean> readSomeEmployee() {
+		return null;
+	}
+
+	@Override
+	public List<EmployeeBean> readOneEmployee() {
+		return null;
+	}
+	
+	
+
+}

@@ -1,0 +1,13 @@
+package com.bory.company.dao;
+
+import java.util.List;
+
+import com.bory.company.domain.EmployeeBean;
+
+public class CompanyDAOImpl {
+	
+	public List<EmployeeBean> readAllEmployee();
+	public List<EmployeeBean> readSomeEmployee();
+	public List<EmployeeBean> readOneEmployee();
+
+}

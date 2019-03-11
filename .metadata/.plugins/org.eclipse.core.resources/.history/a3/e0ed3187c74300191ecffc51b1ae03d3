@@ -1,0 +1,16 @@
+package com.bory.company.command;
+
+import java.sql.Connection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class AbstractCommand implements Command{
+
+	protected Connection conn;
+	@Override
+	public void setConnection(Connection conn) {
+		// TODO Auto-generated method stub
+		
+	}
+}

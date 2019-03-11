@@ -1,0 +1,5 @@
+package com.bory.company.dao;
+
+public class CompanyDAOImpl {
+
+}

@@ -1,0 +1,5 @@
+package com.bory.company.command;
+
+public class UpdateCommand {
+
+}

@@ -1,0 +1,2 @@
+/company/emplist.do=com.bory.company.command.EmpListCommand
+/company/empview.do=com.bory.company.command.EmpViewCommand

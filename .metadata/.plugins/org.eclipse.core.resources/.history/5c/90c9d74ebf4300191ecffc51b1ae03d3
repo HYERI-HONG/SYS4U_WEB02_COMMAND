@@ -1,0 +1,10 @@
+package com.bory.company.command;
+
+import javax.servlet.http.HttpServlet;
+
+public class EmpViewCommand extends HttpServlet {
+	private static final long serialVersionUID = -6162657289515805203L;
+	
+	
+
+}

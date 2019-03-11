@@ -1,0 +1,16 @@
+1552279176829	Delete elements
+1552280170569	Delete elements
+1552281637052	Rename resource 'jsp'
+1552284017983	Rename resource 'empLis.jsp'
+1552290237935	Rename resource 'empView.jsp'
+1552292811347	Rename type 'EmpViewCommand'
+1552292877013	Rename type 'EmpDetailCommand'
+1552292882379	Rename type 'EmpListCommand'
+1552293022005	Rename resource 'index.jsp'
+1552293318546	Rename local variable 'req'
+1552293324547	Rename local variable 'resp'
+1552293423209	Rename local variable 'req'
+1552293428750	Rename local variable 'resp'
+1552294569858	Rename local variable 'searchInfo'
+1552295532667	Rename package 'com.bory.company.domain'
+1552295538839	Rename type 'EmployeeBean'

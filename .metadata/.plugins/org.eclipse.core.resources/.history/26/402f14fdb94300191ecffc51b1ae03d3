@@ -1,0 +1,21 @@
+package com.bory.company.command;
+
+import java.sql.Connection;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class ViewDAO implements Command {
+
+	@Override
+	public void setConnection(Connection conn) {
+		
+	}
+
+	@Override
+	public String execute(HttpServletRequest req, HttpServletResponse resp) {
+		
+		return null;
+	}
+
+}

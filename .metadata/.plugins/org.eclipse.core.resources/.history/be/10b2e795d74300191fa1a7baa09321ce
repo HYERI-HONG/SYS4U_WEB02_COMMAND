@@ -1,0 +1,16 @@
+package com.bory.company.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class EmpListCommand extends AbstractCommand {
+
+	private static final String LIST_VIEW_NAME = "/WEB-INF/view/empList.jsp";
+	
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return LIST_VIEW_NAME;
+	}
+}
