@@ -1,0 +1,31 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>empAdd</title>
+	
+	<link rel="stylesheet" href="${css}/style.css" />
+	<script src="${js}/app.js"></script>
+</head>
+<body>
+<div id="content">	
+	<div id="content_add">
+		<h3>신입 사원 등록</h3>
+		<form id ="addForm" name="addForm">
+			<table id="addTavble">
+			
+			</table>
+		</form>
+	</div>	
+</div>
+<script>
+	document.getElementById('addFormBtn').onclick = function(){
+		alert("등록 버튼 클릭");
+		location.href = ${context}+"/empDetail.do"
+	};
+</script>
+</body>
+</html>

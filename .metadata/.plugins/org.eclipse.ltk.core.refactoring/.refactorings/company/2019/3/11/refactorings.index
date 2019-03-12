@@ -14,3 +14,6 @@
 1552294569858	Rename local variable 'searchInfo'
 1552295532667	Rename package 'com.bory.company.domain'
 1552295538839	Rename type 'EmployeeBean'
+1552356056879	Rename resource 'resources'
+1552366176098	Rename local variable 'emp'
+1552366189797	Rename local variable 'st'

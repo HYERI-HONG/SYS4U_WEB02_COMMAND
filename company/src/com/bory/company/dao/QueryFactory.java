@@ -7,6 +7,15 @@ public class QueryFactory {
 		String query = "";
 		
 		switch (option) {
+		case "insert":
+			query = "INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)" 
+					+ "VALUES(?,?,?,?,?,?,?,?)";
+			break;
+		case "findOne":
+			query = "SELECT ENAME, JOB, EMPNO, MGR, SAL, COMM, DEPTNO, HIREDATE "
+					+ " FROM EMP "
+					+ " WHERE EMPNO = ?";
+			break;
 		case "all":
 			query = "SELECT * FROM EMP ORDER BY HIREDATE DESC";
 			break;

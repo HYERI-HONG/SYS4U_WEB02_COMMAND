@@ -11,6 +11,6 @@ public interface CompanyDAO {
 	public int update(Employee employeeBean);
 	public List<Employee> findAll();
 	public List<Employee> findSome(Map<String, String> findOption);
-	public List<Employee> findOne(String readOption);
+	public Employee findOne(int empNo);
 	public int count();
 }

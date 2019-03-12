@@ -1,0 +1,71 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>empUpdate</title>
+</head>
+<body>
+	<div id="content">
+		<div id="content_update">
+			<h3>사원 정보 수정</h3>
+			<form id ="updateForm" name="updateForm">
+			<table id="empInfo">
+			<tr>
+				<td>사원 번호</td>
+				<td>${employee.empNo}</td>
+				<td>이       름</td>
+				<td>${employee.eName}</td>
+			</tr>
+			
+			<tr>
+				<td>직속 상관</td>
+				<td><input type="text" name ="mgr" value="${employee.mgr}"/></td>
+				<td>입사 날짜</td>
+				<td><input type="date" name="hireDate" value="${employee.hireDate}"/></td>
+			</tr>
+			
+			<tr>
+				<td>연      봉</td>
+				<td><input type="text" name="sal" value="${employee.sal}"/></td>
+				<td>상  여  금</td>
+				<td><input type="text" name="comm" value="${employee.comm}"/></td>
+			</tr>
+			
+			<tr>
+				<td>직      책</td>
+				<td>
+					<select name="deptNo" id="deptNo">
+		    			<option value="10"> Accounting</option>
+		    			<option value="20">Research</option>
+		    			<option value="30">Sales</option>
+		    			<option value="40">Operations</option>
+		    		</select>
+				<td>부      서</td>
+				<td>
+					<select name="job" id="job">
+		    			<option value="CLERK">Clerk</option>
+		    			<option value="SALESMAN">Salesman</option>
+		    			<option value="MANAGER">manager</option>
+		    			<option value="ANALYST">Analyst</option>
+		    			<option value="PRESIDENT">President</option>
+		    		</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><input id="updateFormBtn" type="submit" value="변경" /></td>
+			</tr>
+			</table>
+		</form>
+		</div>
+	</div>
+	<script>
+	for( var i : document.querySelectorAll(".deptNo")){
+		if(i.getAttribute('value')===${employ.deptNo}){
+			i.setAttribute("checked","checked");
+		}
+	}
+</script>
+</body>
+</html>

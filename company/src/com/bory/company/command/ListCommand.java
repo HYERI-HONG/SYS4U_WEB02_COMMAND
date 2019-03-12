@@ -15,7 +15,9 @@ public class ListCommand extends AbstractCommand {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
+		carrierOption = "forward";
 		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
+		request.setAttribute("list",companyDAOImpl.findAll());
 		if(request.getParameter("option").equals("all")) {
 			request.setAttribute("list",companyDAOImpl.findAll());
 		}else {

@@ -41,6 +41,13 @@ public class CompanyServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException{
+		
+		System.out.println("----------CompanyServlet----------");
+		request.getSession().setAttribute("context",request.getContextPath());
+		request.getSession().setAttribute("js",request.getContextPath()+"/resources/js");
+		request.getSession().setAttribute("css",request.getContextPath()+"/resources/css");
+	
+		
 		String uri = request.getRequestURI();
 		String viewName = "/WEB-INF/error/404.jsp";
 		
@@ -48,14 +55,14 @@ public class CompanyServlet extends HttpServlet {
 		if(command != null) {
 			viewName = executeCommand(command, request, response);
 		}
-		try {
-			request.getRequestDispatcher(viewName).forward(request, response);
-		} catch (IOException e) {
-			throw new ServletException(e);
-		}
+		System.out.println("option : "+command.getCarrierOption());
+		new Carrier(request, response).carryTo(command.getCarrierOption(), viewName);
+	
 	}
 	
 	private String executeCommand(Command command, HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("----------executeCommand----------");
 		String viewName = "/WEB-INF/error/500.jsp";
 		try {
 			command.setConnection(dataSource.getConnection());

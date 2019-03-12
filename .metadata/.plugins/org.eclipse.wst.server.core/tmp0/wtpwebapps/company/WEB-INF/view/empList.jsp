@@ -34,7 +34,7 @@
 				</tr>
 				<c:forEach items='${list}' var='employee'>
 					<tr>
-						<td>${employee.empNo}</td>
+						<td><a href ="${context}/empDetail.do?empNo=${employee.empNo}" class="empNo" >${employee.empNo}</a></td>
 						<td>${employee.eName}</td>
 						<td>${employee.job}</td>
 						<td>${employee.mgr}</td>
@@ -49,8 +49,8 @@
 	</div>
 	<script>	
 		document.getElementById('searchButton').onclick = function () {
-			location.href = "<%= application.getContextPath()%>/employee.do?option="+document.getElementById('searchOption').value+"&word="+document.getElementById('searchWord').value;
-		};
+			location.href = ${context}+"/empList.do?option="+document.getElementById('searchOption').value+"&word="+document.getElementById('searchWord').value;
+		};		
 	</script>
 </body>
 </html>

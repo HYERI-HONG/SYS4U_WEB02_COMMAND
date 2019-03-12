@@ -1,0 +1,39 @@
+package com.bory.company.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bory.company.dao.CompanyDAOImpl;
+import com.bory.company.dto.Employee;
+
+public class AddCommand extends AbstractCommand{
+
+	private static final String ADD_VIEW_NAME = "/WEB-INF/view/empDetail.jsp";
+	
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("----------AddCommand----------");
+		Employee employee = new Employee();
+		employee.setComm(Integer.parseInt(request.getParameter("comm"))); 	
+		employee.setDeptNo(Integer.parseInt(request.getParameter("deptNo")));
+		employee.setEmpNo(Integer.parseInt(request.getParameter("empNo")));
+		employee.seteName(request.getParameter("eName"));
+		employee.setHireDate(request.getParameter("hireDate"));
+		employee.setJob(request.getParameter("job"));
+		employee.setMgr(Integer.parseInt(request.getParameter("mgr")));
+		employee.setSal(Integer.parseInt(request.getParameter("sal")));
+		
+		String view_name = "/company/empAdd.do?option=all";
+		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
+		if(companyDAOImpl.insert(employee)==1) {
+			request.setAttribute("empNo", o);
+			view_name = "/WEB-INF/view/empDetail.jsp";
+		}
+		
+		return view_name;
+	}
+	
+	
+
+}

@@ -1,0 +1,17 @@
+package com.bory.company.command;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class MoveCommand extends AbstractCommand{
+
+	private static final String VIEW_NAME = "/WEB-INF/view/";
+	
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String moveViewName = VIEW_NAME+ request.getParameter("pageName")+".jsp";
+		return moveViewName;
+	}
+
+}
