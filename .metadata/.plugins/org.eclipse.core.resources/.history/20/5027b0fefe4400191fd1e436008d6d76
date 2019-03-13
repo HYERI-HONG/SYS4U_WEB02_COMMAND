@@ -1,0 +1,49 @@
+package com.bory.company.command;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.bory.company.dao.CompanyDAOImpl;
+import com.bory.company.dto.Employee;
+
+public class SearchCommand extends AbstractCommand {
+
+	private static final String LIST_VIEW_NAME = "/WEB-INF/view/empList.jsp";
+	
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+
+		System.out.println("----------SearchCommand----------");
+		carrierOption="forward";
+		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
+		List<Employee> list = new ArrayList<>();
+		
+		switch(request.getParameter("serchOption")) {
+		case "findOne":
+			
+			list.add(companyDAOImpl.findOne(Integer.parseInt(request.getParameter("searchWord"))));
+			
+			break;
+		case "findAll":
+			list = companyDAOImpl.findAll();
+			break;
+		case "findSomeByname":
+		case "findSomeByDeptNo":
+			System.out.println("01.search command case 내부");
+			list = companyDAOImpl.findSome(request.getParameter("serchOption")
+					+"/"
+					+request.getParameter("searchWord"));
+			break;
+		
+		}
+		request.setAttribute("list", list);
+		return LIST_VIEW_NAME;
+	}
+
+}

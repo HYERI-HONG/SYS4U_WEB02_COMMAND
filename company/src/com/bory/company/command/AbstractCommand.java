@@ -20,6 +20,7 @@ public abstract class AbstractCommand implements Command{
 	public String getCarrierOption() {
 		return carrierOption;
 	}
+	
 	protected String getParameter(HttpServletRequest req, String name, String defaultValue) {
 		String value = req.getParameter(name);
 		return value == null ? defaultValue : value;

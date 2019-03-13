@@ -1,0 +1,65 @@
+package com.bory.company.command;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import com.bory.company.dao.CompanyDAOImpl;
+import com.bory.company.dto.Employee;
+
+public class ListCommand extends AbstractCommand {
+
+	private static final String LIST_VIEW_NAME = "/WEB-INF/view/empList.jsp";
+	
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("ListCommand : "+request.getParameter("pageNum"));
+		
+		Map<String,Object> param = new HashMap<>();
+		List<Employee> list = new ArrayList<>();
+		carrierOption = "forward";
+		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
+	
+		
+		String pageNum=request.getParameter("pageNum");
+		int pn =(pageNum==null)? 1 :Integer.parseInt(pageNum);
+		
+		Pagination page = new Pagination();
+		page.calcPage(pn, new CompanyDAOImpl(connection).count());
+		String[] arr1 = {"beginRow","endRow","searchOption","searchWord"};
+		String[] arr2 = {
+				String.valueOf(page.getBeginRow())
+				,String.valueOf(page.getEndRow())
+				,request.getParameter("searchOption")
+				,request.getParameter("searchWord")};
+		
+		for(int i=0; i<4;i++) {
+			param.put(arr1[i], arr2[i]);
+		}
+	
+		switch(request.getParameter("serchOption")) {
+		case "findOne":
+			list.add(companyDAOImpl.findOne(Integer.parseInt(request.getParameter("searchWord"))));
+			break;
+		case "findAll":
+			
+			list = companyDAOImpl.findAll();
+			break;
+		case "findSomeByname":
+		case "findSomeByDeptNo":
+			list = companyDAOImpl.findSome(request.getParameter("serchOption")
+					+"/"
+					+request.getParameter("searchWord"));
+			break;
+		}
+		
+		request.setAttribute("page",page);
+		request.setAttribute("list", list);
+
+		return LIST_VIEW_NAME;
+	}
+}

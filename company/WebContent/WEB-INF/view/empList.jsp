@@ -11,14 +11,16 @@
 	<h3>사원 목록</h3>
 	<div id="content">
 		<div id="content_search">
-			<select name="serch" id="searchOption">
+		<form action="${context}/empList.do" method="post">
+			<select name="serchOption">
 				<option value="all">전체 조회</option>
-				<option value="name">이름</option>
+				<option value="ename">이름</option>
 				<option value="empno">사원번호</option>
-				<option value="deptno">부서명</option>
+				<option value="dname">부서명</option>
 			</select> 
-			<input id="searchWord" type="text" placeholder="검색어 입력" /> 
-			<input type="button" id="searchButton" value="검색" />
+			<input name="searchWord" type="text" placeholder="검색어 입력" /> 
+			<input type="submit" id="searchButton" value="검색" />
+		</form>		
 		</div>
 		<div id="content_list">
 			<table id="employee_list">
@@ -44,13 +46,47 @@
 						<td>${employee.deptNo}</td>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td>
+						<h4>전체 회원 수 : ${page.count}</h4>
+					</td>
+					<td colspan="5">
+						<ul class="pageBox" style="display: inline; list-style: none;">
+						<c:if test="${page.existPrev}">
+							<li style="display: inline" id="${page.prevBlock}" class="changePage">◀이전 </li>
+						</c:if>
+						<c:forEach begin="${page.beginPage}" end="${page.endPage}" step="1" varStatus="i">
+							<li style="display: inline">
+								<a class="changePage" id="${i.index}">${i.index}</a>
+							</li>
+						</c:forEach>
+						<c:if test="${page.existNext}">
+							<li style="display: inline" id="${page.nextBlock}" class="changePage"> 다음▶</li>
+						</c:if>
+						</ul>
+					</td>				
+					<td>
+						<input id="addBtn" type="button" value="사원 등록" />
+						
+					</td>
+				<tr>
+			
 			</table>
 		</div>
 	</div>
-	<script>	
-		document.getElementById('searchButton').onclick = function () {
-			location.href = ${context}+"/empList.do?option="+document.getElementById('searchOption').value+"&word="+document.getElementById('searchWord').value;
-		};		
+	<script type="text/javascript">
+		
+		document.getElementById('addBtn').addEventListener('click',function(){
+			location.href = "<%=application.getContextPath()%>/move.do?pageName=empAdd"
+		});
+		
+		var pageNum = document.querySelectorAll('.changePage');
+		for(var i=0; i<pageNum.length; i++){
+			pageNum[i].addEventListener('click',function(){
+				var pageNum = this.getAttribute('id');
+				location.href ="<%=application.getContextPath()%>/empList.do?pageNum="+pageNum+"&searchWord=${searchWord}&searchOption=some";
+			});
+		}
 	</script>
 </body>
 </html>

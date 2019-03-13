@@ -1,16 +1,16 @@
 package com.bory.company.dao;
 
 import java.util.List;
-import java.util.Map;
-
 import com.bory.company.dto.Employee;
+import com.bory.company.dto.Pagination;
 
 public interface CompanyDAO {
 	
-	public int insert(Employee employeeBean);
-	public int update(Employee employeeBean);
-	public List<Employee> findAll();
-	public List<Employee> findSome(Map<String, String> findOption);
+	public int insert(Employee employee);
+	public int update(Employee employee);
+	public List<Employee> findAll(Pagination page);
+	public List<Employee> findSome(String option, Pagination page);
 	public Employee findOne(int empNo);
-	public int count();
+	public int countAll();
+	public int countSome(String option);
 }

@@ -1,0 +1,20 @@
+package com.bory.company.command;
+
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class UpdateCommand extends AbstractCommand{
+
+	private static final String UPDATE_VIEW_NAME = "/WEB-INF/view/empUpdate.jsp";
+	
+	@Override
+	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		System.out.println("----------UpdateCommand----------");
+		System.out.println(request.getParameter("empNo"));
+		System.out.println(request.getParameter("hireDate"));
+		return null;
+	}
+
+}

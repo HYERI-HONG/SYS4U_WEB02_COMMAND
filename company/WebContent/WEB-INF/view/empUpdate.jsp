@@ -5,11 +5,18 @@
 <head>
 	<meta charset="UTF-8">
 	<title>empUpdate</title>
-	
 	<script>
-	for( var i of document.querySelectorAll(".deptNo")){
-		if(i.getAttribute('value')===${employ.deptNo}){
-			i.setAttribute("checked","checked");
+	var deptNo = document.getElementById('deptNo');
+	var job = document.getElementById('job');
+	
+	for(var i=0; i<deptNo.options.length; i++){
+		if(deptNo.options[i].value==='${employ.deptNo}'){
+			deptNo.options[i].setAttribute("selected","selected");
+		}
+	}
+	for(var j=0; j<job.options.length; j++){
+		if(job.options[j].value==='${employ.job}'){
+			job.options[j].setAttribute("selected","selected");
 		}
 	}
 	</script>
@@ -18,8 +25,8 @@
 	<div id="content">
 		<div id="content_update">
 			<h3>사원 정보 수정</h3>
-			<form id ="updateForm" name="updateForm">
-			<table id="empInfo">
+			<form id="updateForm" action="${context}/empUpdate.do?empNo=${employee.empNo}&eName=${employee.eName}" method="post">
+			<table id="updateInfo">
 			<tr>
 				<td>사원 번호</td>
 				<td>${employee.empNo}</td>
@@ -44,30 +51,31 @@
 			<tr>
 				<td>부서</td>
 				<td>
-					<select name="deptNo">
-		    			<option value="10" class="deptNo"> Accounting</option>
-		    			<option value="20" class="deptNo">Research</option>
-		    			<option value="30" class="deptNo">Sales</option>
-		    			<option value="40" class="deptNo">Operations</option>
+					<select name="deptNo" id="deptNo">
+		    			<option value="10" > Accounting</option>
+		    			<option value="20" >Research</option>
+		    			<option value="30" >Sales</option>
+		    			<option value="40" >Operations</option>
 		    		</select>
 				<td>직책</td>
 				<td>
 					<select name="job" id="job">
-		    			<option value="CLERK" class="job">Clerk</option>
-		    			<option value="SALESMAN" class="job">Salesman</option>
-		    			<option value="MANAGER" class="job">manager</option>
-		    			<option value="ANALYST" class="job">Analyst</option>
-		    			<option value="PRESIDENT" class="job">President</option>
+		    			<option value="CLERK" >Clerk</option>
+		    			<option value="SALESMAN" >Salesman</option>
+		    			<option value="MANAGER" >manager</option>
+		    			<option value="ANALYST" >Analyst</option>
+		    			<option value="PRESIDENT" >President</option>
 		    		</select>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="4"><input id="updateFormBtn" type="submit" value="변경" /></td>
+				<td colspan="4">
+				<input id="updateFormBtn" type="submit" value="변경" />
+				</td>
 			</tr>
 			</table>
 		</form>
 		</div>
 	</div>
-
 </body>
 </html>

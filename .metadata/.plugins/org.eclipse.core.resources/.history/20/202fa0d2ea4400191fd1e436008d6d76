@@ -1,0 +1,3 @@
+function goPage(){
+	location.href=" ";
+}

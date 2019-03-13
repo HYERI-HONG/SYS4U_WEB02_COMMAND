@@ -19,11 +19,6 @@ public class CommandFactory {
 		this.commandPropertiesFilePath = commandPropertiesFilePath;
 	}
 	
-	/**
-	 * uri에 맞는 Command 인스턴스를 신규 생성해준다. 없으면 null을 리턴하니 받는 쪽에서 알아서 잘 처리해라.
-	 * @param uri
-	 * @return
-	 */
 	public Command createCommand(String uri) {
 		try {
 			return commandMap.get(uri).newInstance();

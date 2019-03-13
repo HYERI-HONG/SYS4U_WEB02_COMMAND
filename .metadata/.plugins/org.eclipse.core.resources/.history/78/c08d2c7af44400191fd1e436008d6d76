@@ -1,0 +1,5 @@
+/company/move.do=com.bory.company.command.MoveCommand
+/company/empAdd.do=com.bory.company.command.AddCommand
+/company/empDetail.do=com.bory.company.command.DetailCommand
+/company/empUpdate.do=com.bory.company.command.UpdateCommand
+/company/emplist.do=com.bory.company.command.ListCommand

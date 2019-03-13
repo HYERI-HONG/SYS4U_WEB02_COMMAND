@@ -1,0 +1,94 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>empUpdate</title>
+	<script type="text/javascript" src="/company/static-root/js/emp/emp.js"></script>
+</head>
+<body>
+	<div id="content">
+		<div id="content_update">
+			<h3>사원 정보 수정</h3>
+			<form id="updateForm">
+			<table id="updateInfo">
+			<tr>
+				<td>사원 번호</td>
+				<td>${employee.empNo}</td>
+				<td>이       름</td>
+				<td>${employee.eName}</td>
+			</tr>
+			
+			<tr>
+				<td>직속 상관</td>
+				<td><input type="text" name ="mgr" value="${employee.mgr}"/></td>
+				<td>입사 날짜</td>
+				<td><input type="date" name="hireDate" value="${employee.hireDate}"/></td>
+			</tr>
+			
+			<tr>
+				<td>연      봉</td>
+				<td><input type="text" name="sal" value="${employee.sal}"/></td>
+				<td>상  여  금</td>
+				<td><input type="text" name="comm" value="${employee.comm}"/></td>
+			</tr>
+			
+			<tr>
+				<td>부서</td>
+				<td>
+					<select name="deptNo" id="deptNo">
+		    			<option value="10" class="deptNo"> Accounting</option>
+		    			<option value="20" class="deptNo">Research</option>
+		    			<option value="30" class="deptNo">Sales</option>
+		    			<option value="40" class="deptNo">Operations</option>
+		    		</select>
+				<td>직책</td>
+				<td>
+					<select name="job" id="job">
+		    			<option value="CLERK" class="job">Clerk</option>
+		    			<option value="SALESMAN" class="job">Salesman</option>
+		    			<option value="MANAGER" class="job">manager</option>
+		    			<option value="ANALYST" class="job">Analyst</option>
+		    			<option value="PRESIDENT" class="job">President</option>
+		    		</select>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4"><input id="updateFormBtn" type="button" value="변경" /></td>
+			</tr>
+			</table>
+		</form>
+		</div>
+	</div>
+	<script>
+	var deptNo = document.getElementById('deptNo');
+	var job = document.getElementById('job');
+	
+	for(var i=0; i<deptNo.options.length; i++){
+		if(deptNo.options[i].value==='${employ.deptNo}'){
+			deptNo.options[i].setAttribute("selected","selected");
+		}
+	}
+	for(var j=0; j<job.options.length; j++){
+		if(job.options[j].value==='${employ.job}'){
+			job.options[j].setAttribute("selected","selected");
+		}
+	}
+	
+	document.getElementById('updateFormBtn').addEventListener('click',function(){
+		alert("변경 버튼 클릭");
+		var form = document.getElementById('updateForm');
+		form.action = "${context}/empUpdate.do";
+		form.method = "post";
+				
+		var node = document.createElement('input');
+		node.innerHTML='<input type="hidden" name="empNo" value='${employ.empNo}' />';
+		form.appendChild(node); 
+		
+		form.submit();
+		
+	});
+	</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+
+
+
+for( var i of document.querySelectorAll(".deptNo")){
+		if(i.getAttribute('value')===${employ.deptNo}){
+			i.setAttribute("checked","checked");
+		}
+	}

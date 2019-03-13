@@ -1,17 +1,27 @@
 package com.bory.company.command;
 
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.bory.company.dao.CompanyDAOImpl;
+import com.bory.company.dto.Employee;
 
 public class UpdateCommand extends AbstractCommand{
-
-	private static final String UPDATE_VIEW_NAME = "/WEB-INF/view/empUpdate.jsp";
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		return null;
+		
+		carrierOption = "redirect";
+		String viewName = "/company/empList.do?option=all";
+		
+		Employee employee = new Employee();
+		employee = setEmployee(request);
+		
+		if(new CompanyDAOImpl(connection).update(employee)!=1) {
+			//실패 했을 경우 추가 처리
+			viewName="/company/empUpdate.do";
+		}
+		
+		return viewName;
 	}
 
 }

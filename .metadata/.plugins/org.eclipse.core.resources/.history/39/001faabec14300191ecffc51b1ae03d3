@@ -1,8 +1,0 @@
-package com.bory.company.dao;
-
-public class CompanyDAOImpl {
-	
-	public List<> readAllEmployee();
-	public List<String, String>
-
-}

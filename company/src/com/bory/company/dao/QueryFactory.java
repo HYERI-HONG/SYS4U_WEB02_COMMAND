@@ -9,25 +9,43 @@ public class QueryFactory {
 		switch (option) {
 		case "insert":
 			query = "INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)" 
-					+ "VALUES(?,?,?,?,?,?,?,?)";
+					+ " VALUES(?,?,?,?,?,?,?,?)";
 			break;
-		case "findOne":
+		case "update":
+			query = "UPDATE EMP SET JOB = ?, MGR = ?, SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
+			break;
+		case "empno":
 			query = "SELECT ENAME, JOB, EMPNO, MGR, SAL, COMM, DEPTNO, HIREDATE "
 					+ " FROM EMP "
 					+ " WHERE EMPNO = ?";
 			break;
 		case "all":
-			query = "SELECT * FROM EMP ORDER BY HIREDATE DESC";
+			query = "SELECT T.* " 
+					+ " FROM(SELECT ROWNUM SEQ, E.*" 
+					+ " FROM EMP E "
+					+ " ORDER BY HIREDATE DESC) T" 
+					+ " WHERE T.SEQ BETWEEN ? AND ?";
 			break;
-		case "name":
-			query = "SELECT * FROM EMP WHERE ENAME LIKE '%' || ? || '%'";
+		case "some":
+			query = "SELECT * FROM ("
+					+ " SELECT ROWNUM AS RNUM, E.EMPNO, E.ENAME, E.HIREDATE, E.DEPTNO, E.COMM, E.SAL, E.MGR, E.JOB "
+					+ " FROM EMP E, DEPT D" 
+					+ " WHERE E.DEPTNO = D.DEPTNO" 
+					+ " AND %s LIKE ?" 
+					+ " ORDER BY EMPNO DESC)" 
+					+ " WHERE RNUM BETWEEN ? AND ?";
 			break;
-		case "empno":
-			query = "SELECT * FROM EMP WHERE EMPNO = ?";
+		case "countsome":
+			query = "SELECT COUNT(*) AS NUM" + 
+					" FROM EMP E, DEPT D" + 
+					" WHERE E.DEPTNO = D.DEPTNO" + 
+					" AND %s LIKE ?";
 			break;
-		case "deptno":
-			query = "SELECT E.* FROM EMP E WHERE E.DEPTNO = (SELECT D.DEPTNO FROM DEPT D WHERE DNAME = ?)";
+		case "countall":
+			query = "SELECT COUNT(1) AS NUM" + 
+					" FROM EMP";
 			break;
+			
 		}
 		return query;
 	}
