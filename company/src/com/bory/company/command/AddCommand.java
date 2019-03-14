@@ -10,14 +10,13 @@ public class AddCommand extends AbstractCommand{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("----------AddCommand----------");
-		String viewName = "/company/empAdd.do";
+		String viewName = "/company/empDetail.do?empNo="+request.getParameter("empNo");
 		carrierOption = "redirect";
 		
-		Employee employee = setEmployee(request);	
-		if(new CompanyDAOImpl(connection).insert(employee)==1) {
-			viewName="/company/empList.do?option=all";
-		}
+		Employee employee = new Employee();
+		employee.create(request);	
+	
+		new CompanyDAOImpl(connection).insert(employee);
 		
 		return viewName;
 	}

@@ -12,15 +12,12 @@ public class Pagination implements Serializable{
 
 	public void calcPage(int pageNum, int count) {	
 		this.count = count;
-		this.pageRow = 5;
+		this.pageRow = 3;
 		this.blockSize = 5;
 
 		this.lastPage = count%pageRow>0? count/pageRow+1:count/pageRow;
 		this.beginPage = pageNum-((pageNum-1)%blockSize);
-		//this.endPage = ((beginPage+pageRow-1)<count)? beginPage+blockSize-1:count;
 		this.endPage = ((beginPage+blockSize-1)>lastPage)? lastPage:beginPage+blockSize-1;
-		
-		
 		
 		this.beginRow = (pageRow*pageNum)-(pageRow-1);
 		this.endRow = pageNum ==lastPage? pageRow*pageNum-pageRow+(count%pageRow):pageRow*pageNum;

@@ -13,37 +13,34 @@ import com.bory.company.dto.Pagination;
 
 public class ListCommand extends AbstractCommand {
 
-	private static final String LIST_VIEW_NAME = "/WEB-INF/view/empList.jsp";
+	private static final String LIST_VIEW_NAME = "/WEB-INF/view/emp/empList.jsp";
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("ListCommand ");
 		List<Employee> list = new ArrayList<>();
 		carrierOption = "forward";
 		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
-	
-		System.err.println("searchWord : "+request.getParameter("searchWord"));
-		System.err.println("searchoption : "+request.getParameter("serchOption"));
-		
 		
 		String pageNum=request.getParameter("pageNum");
 		int pn =(pageNum==null)? 1 :Integer.parseInt(pageNum);
 		
 		String searchWord = request.getParameter("searchWord");
-		String serchOption = request.getParameter("serchOption");
-		if(serchOption==null) {
-			serchOption = "all";
-		}else if(serchOption=="ename"||serchOption=="dname") {
-			serchOption = "some";
-		}
-				
-	
+		String searchOption = request.getParameter("searchOption");
 		
+		String check="all";
+		if(searchOption==null) {
+			check = "all";
+		}else if(searchOption.equals("ename")||searchOption.equals("dname")) {
+			check = "some";
+		}else if(searchOption.equals("empno")) {
+			check = "one";
+		}
+
 		Pagination page = new Pagination();
 	
-		switch(serchOption) {
-		case "empno":
+		switch(check) {
+		case "one":
 			list.add(companyDAOImpl.findOne(Integer.parseInt(searchWord)));
 			page.calcPage(1, 1);
 			break;
@@ -51,16 +48,11 @@ public class ListCommand extends AbstractCommand {
 			page.calcPage(pn,companyDAOImpl.countAll());
 			list = companyDAOImpl.findAll(page);
 			break;
-		case "some":
-			System.out.println("searchOption : "+serchOption);
-			System.out.println("searchWord : "+searchWord);
-			
-			int count = companyDAOImpl.countSome(serchOption+"/"+searchWord);
-			System.out.println("count : "+count);
+		case "some":		
+			int count = companyDAOImpl.countSome(searchOption+"/"+searchWord);
 			page.calcPage(pn, count);
-			list = companyDAOImpl.findSome(serchOption+"/"+searchWord, page);
-			System.out.println("결과 개수 "+list.size());
-			request.setAttribute("searchOption",serchOption);
+			list = companyDAOImpl.findSome(searchOption+"/"+searchWord, page);
+			request.setAttribute("searchOption",searchOption);
 			request.setAttribute("searchWord",searchWord);
 			break;
 		}

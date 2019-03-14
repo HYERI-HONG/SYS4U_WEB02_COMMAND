@@ -13,4 +13,5 @@ public interface CompanyDAO {
 	public Employee findOne(int empNo);
 	public int countAll();
 	public int countSome(String option);
+	public boolean exists(String option);
 }

@@ -38,19 +38,7 @@ public abstract class AbstractCommand implements Command{
 		return intValue;
 	}
 	
-	protected Employee setEmployee(HttpServletRequest request) {
-		Employee employee = new Employee();
-		employee.setComm(Integer.parseInt(request.getParameter("comm"))); 	
-		employee.setDeptNo(Integer.parseInt(request.getParameter("deptNo")));
-		employee.setEmpNo(Integer.parseInt(request.getParameter("empNo")));
-		employee.seteName(request.getParameter("eName"));
-		employee.setHireDate(request.getParameter("hireDate"));
-		employee.setJob(request.getParameter("job"));
-		employee.setMgr(Integer.parseInt(request.getParameter("mgr")));
-		employee.setSal(Integer.parseInt(request.getParameter("sal")));
-		
-		return employee;
-	}
+	
 	@Override
 	public void destroy() {
 		try {

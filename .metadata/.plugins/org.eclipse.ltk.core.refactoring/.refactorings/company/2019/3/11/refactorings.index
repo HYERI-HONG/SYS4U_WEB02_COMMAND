@@ -21,3 +21,11 @@
 1552396311200	Rename resource 'empList.js'
 1552427307341	Delete element
 1552437456013	Move compilation unit
+1552525698816	Move 4 resources to 'emp'
+1552525840112	Move 'ajax.jsp' to 'common'
+1552526081998	Move 'resources' to 'WebContent'
+1552526090634	Delete element
+1552526141389	Delete element
+1552526147459	Rename resource 'emp.js'
+1552526390893	Rename resource 'static-root'
+1552538678695	Move 'error' to 'view'

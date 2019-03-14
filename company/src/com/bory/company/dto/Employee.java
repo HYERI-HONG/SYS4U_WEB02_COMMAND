@@ -3,6 +3,8 @@ package com.bory.company.dto;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class Employee implements Serializable {
 
 	private static final long serialVersionUID = -4312910826157323298L;
@@ -85,4 +87,17 @@ public class Employee implements Serializable {
 		return String.format("EmployeeBean [eName= %6s, job= %9s, empNo= %5d, mgr= %5d, sal= %5d"
 				+ ",comm= %4d, deptNo= %2d, hireDate= %10s]", eName,job,empNo,mgr,sal,comm,deptNo,hireDate);
 	} 
+	
+	public void create(HttpServletRequest request) { 
+		
+		this.comm = Integer.parseInt(request.getParameter("comm")); 	
+		this.deptNo = Integer.parseInt(request.getParameter("deptNo"));
+		this.empNo = Integer.parseInt(request.getParameter("empNo"));
+		this.eName = request.getParameter("eName");
+		this.hireDate = java.sql.Date.valueOf(request.getParameter("hireDate"));
+		this.job = request.getParameter("job");
+		this.mgr = Integer.parseInt(request.getParameter("mgr"));
+		this.sal = Integer.parseInt(request.getParameter("sal"));
+
+	}
 }

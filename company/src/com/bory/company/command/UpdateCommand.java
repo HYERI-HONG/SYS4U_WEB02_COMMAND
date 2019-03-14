@@ -11,16 +11,12 @@ public class UpdateCommand extends AbstractCommand{
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		carrierOption = "redirect";
-		String viewName = "/company/empList.do?option=all";
+		String viewName = "/company/empDetail.do?empNo="+request.getParameter("empNo");
 		
 		Employee employee = new Employee();
-		employee = setEmployee(request);
-		
-		if(new CompanyDAOImpl(connection).update(employee)!=1) {
-			//실패 했을 경우 추가 처리
-			viewName="/company/empUpdate.do";
-		}
-		
+		employee.create(request);
+		new CompanyDAOImpl(connection).update(employee);
+	
 		return viewName;
 	}
 

@@ -117,7 +117,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 		}finally {
 			close(rs, statement);
 		}
-		System.out.println("findSome : "+ list.toString());
 		
 		return list;
 	}
@@ -129,7 +128,7 @@ public class CompanyDAOImpl implements CompanyDAO {
 		Employee employee = new Employee();
 
 		try {
-			statement = connection.prepareStatement(QueryFactory.getQuery("empno"));
+			statement = connection.prepareStatement(QueryFactory.getQuery("one"));
 			statement.setInt(1, empNo);
 			rs = statement.executeQuery();
 
@@ -147,16 +146,10 @@ public class CompanyDAOImpl implements CompanyDAO {
 	@Override
 	public int countSome(String option) {
 		
-		System.out.println("count some dao 진입");
-		
 		PreparedStatement statement = null;
 		ResultSet rs = null;
-		
-		System.out.println("option"+option);
 		String searchOption = option.split("/")[0];
 		String searchWord = option.split("/")[1];
-		System.out.println("searchOption"+searchOption);
-		System.out.println("searchWord"+searchWord);
 
 		try { 
 			String sql = String.format(QueryFactory.getQuery("countsome"), searchOption);
@@ -178,8 +171,6 @@ public class CompanyDAOImpl implements CompanyDAO {
 	@Override
 	public int countAll() {
 		
-		System.out.println("count all dao 진입");
-		
 		ResultSet rs = null;
 
 		try { 
@@ -195,6 +186,30 @@ public class CompanyDAOImpl implements CompanyDAO {
 		}
 		return 0;
 	
+	}
+
+	@Override
+	public boolean exists(String option) {
+		
+		PreparedStatement statement = null;
+		ResultSet rs = null;
+		boolean exists = false;
+		
+		try {
+			String sql = String.format(QueryFactory.getQuery("exists"), option.split("/")[0]);
+			statement = connection.prepareStatement(sql);
+			statement.setString(1, option.split("/")[1]);
+			rs = statement.executeQuery();
+
+			exists = rs.next();
+			
+		} catch (SQLException e) {
+			throw new DAOException(e);
+		}finally {
+			close(rs, statement);
+		}
+		
+		return exists;
 	}
 
 	
