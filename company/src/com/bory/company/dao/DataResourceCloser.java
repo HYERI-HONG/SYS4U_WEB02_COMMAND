@@ -1,12 +1,14 @@
 package com.bory.company.dao;
 
+import com.bory.company.exception.FailToCloseTheResourceException;
+
 public class DataResourceCloser {
 	public static void close(AutoCloseable closeable) {
 		if (closeable != null) {
 			try {
 				closeable.close();
 			} catch (Exception e) {
-				// Exception√≥∏Æ
+				throw new FailToCloseTheResourceException();
 			}
 		}
 	}
@@ -17,14 +19,14 @@ public class DataResourceCloser {
 			try {
 				closeable1.close();
 			} catch (Exception e) {
-
+				throw new FailToCloseTheResourceException();
 			}
 		}
 		if (closeable2 != null) {
 			try {
 				closeable2.close();
 			} catch (Exception e) {
-
+				throw new FailToCloseTheResourceException();
 			}
 		}
 	}

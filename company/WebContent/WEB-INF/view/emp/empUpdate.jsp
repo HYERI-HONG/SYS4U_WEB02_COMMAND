@@ -71,7 +71,7 @@
 			<tr>
 				<td colspan="3"><td>
 				<td><input id="updateFormBtn" type="submit" value="변경" />
-				<input type="button" onclick="javascript:history.back();" value="취소"></td>
+				<input type="button" onclick= "javascript:history.back();" value="취소"></td>
 			</tr>
 			</table>
 		</form>

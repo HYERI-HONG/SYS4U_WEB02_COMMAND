@@ -1,4 +1,4 @@
-package filter;
+package com.bory.company.filter;
 
 import java.io.IOException;
 

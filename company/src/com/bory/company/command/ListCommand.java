@@ -13,53 +13,53 @@ import com.bory.company.dto.Pagination;
 
 public class ListCommand extends AbstractCommand {
 
-	private static final String LIST_VIEW_NAME = "/WEB-INF/view/emp/empList.jsp";
-	
+	private static final String FOWARD_URL = "/WEB-INF/view/emp/empList.jsp";
+
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		
+
 		List<Employee> list = new ArrayList<>();
-		carrierOption = "forward";
 		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
-		
-		String pageNum=request.getParameter("pageNum");
-		int pn =(pageNum==null)? 1 :Integer.parseInt(pageNum);
-		
+
+		String pageNum = request.getParameter("pageNum");
+		int pn = (pageNum == null) ? 1 : Integer.parseInt(pageNum);
+
 		String searchWord = request.getParameter("searchWord");
 		String searchOption = request.getParameter("searchOption");
-		
-		String check="all";
-		if(searchOption==null) {
+
+		String check = "all";
+		if (searchOption == null) {
 			check = "all";
-		}else if(searchOption.equals("ename")||searchOption.equals("dname")) {
+		}else if (searchOption.equals("ename") || searchOption.equals("dname")) {
 			check = "some";
-		}else if(searchOption.equals("empno")) {
+		} else if (searchOption.equals("empno")) {
 			check = "one";
 		}
-
+		
+		
 		Pagination page = new Pagination();
-	
-		switch(check) {
+
+		switch (check) {
 		case "one":
 			list.add(companyDAOImpl.findOne(Integer.parseInt(searchWord)));
 			page.calcPage(1, 1);
 			break;
+		case "some":
+			int count = companyDAOImpl.countSome(searchOption + "/" + searchWord);
+			page.calcPage(pn, count);
+			list = companyDAOImpl.findSome(searchOption + "/" + searchWord, page);
+			request.setAttribute("searchOption", searchOption);
+			request.setAttribute("searchWord", searchWord);
+			break;
 		case "all":
-			page.calcPage(pn,companyDAOImpl.countAll());
+			page.calcPage(pn, companyDAOImpl.countAll());
 			list = companyDAOImpl.findAll(page);
 			break;
-		case "some":		
-			int count = companyDAOImpl.countSome(searchOption+"/"+searchWord);
-			page.calcPage(pn, count);
-			list = companyDAOImpl.findSome(searchOption+"/"+searchWord, page);
-			request.setAttribute("searchOption",searchOption);
-			request.setAttribute("searchWord",searchWord);
-			break;
 		}
-		
-		request.setAttribute("page",page);
+
+		request.setAttribute("page", page);
 		request.setAttribute("list", list);
 
-		return LIST_VIEW_NAME;
+		return FOWARD_URL;
 	}
 }

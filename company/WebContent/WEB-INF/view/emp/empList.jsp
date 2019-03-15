@@ -48,7 +48,7 @@
 				</c:forEach>
 				<tr>
 					<td>
-						<h4>전체 회원 수 : ${page.count}</h4>
+						<h4>조회 결과 : ${page.count}</h4>
 					</td>
 					<td colspan="5">
 						<ul class="pageBox" style="display: inline; list-style: none;">

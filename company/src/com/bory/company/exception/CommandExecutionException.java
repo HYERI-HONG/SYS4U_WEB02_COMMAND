@@ -1,4 +1,4 @@
-package exception;
+package com.bory.company.exception;
 
 public class CommandExecutionException extends RuntimeException {
 	private static final long serialVersionUID = 6703256960467753048L;

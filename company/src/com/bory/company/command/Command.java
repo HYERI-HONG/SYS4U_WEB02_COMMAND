@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 public interface Command {
 	
 	public void setConnection(Connection connection);
-	public String getCarrierOption();
 	public String execute(HttpServletRequest request, HttpServletResponse response);
 	public void destroy();
 	

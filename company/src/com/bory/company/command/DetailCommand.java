@@ -8,17 +8,16 @@ import com.bory.company.dto.Employee;
 
 public class DetailCommand extends AbstractCommand {
 
-	private static final String DETAIL_VIEW_NAME = "/WEB-INF/view/emp/empDetail.jsp";
+	private static final String FOWARD_URL = "/WEB-INF/view/emp/empDetail.jsp";
 	
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		carrierOption = "forward";
 		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
 		Employee employee = companyDAOImpl.findOne(Integer.parseInt(request.getParameter("empNo")));
 		request.setAttribute("employee", employee);
 		
-		return DETAIL_VIEW_NAME;
+		return FOWARD_URL;
 	}
 
 	

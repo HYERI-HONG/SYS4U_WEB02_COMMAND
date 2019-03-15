@@ -29,3 +29,9 @@
 1552526147459	Rename resource 'emp.js'
 1552526390893	Rename resource 'static-root'
 1552538678695	Move 'error' to 'view'
+1552613639130	Rename package 'exception'
+1552613663086	Rename package 'filter'
+1552614316827	Copy file
+1552614702104	Rename local variable 'moveViewName'
+1552615302078	Copy compilation unit
+1552615388147	Delete element

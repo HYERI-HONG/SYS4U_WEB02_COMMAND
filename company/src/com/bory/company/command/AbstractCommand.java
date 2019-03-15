@@ -10,15 +10,10 @@ import com.bory.company.dto.Employee;
 public abstract class AbstractCommand implements Command{
 
 	protected Connection connection;
-	protected String carrierOption;
 
 	@Override
 	public void setConnection(Connection conn) {
 		this.connection = conn;
-	}
-	@Override
-	public String getCarrierOption() {
-		return carrierOption;
 	}
 	
 	protected String getParameter(HttpServletRequest req, String name, String defaultValue) {
@@ -37,7 +32,6 @@ public abstract class AbstractCommand implements Command{
 		}
 		return intValue;
 	}
-	
 	
 	@Override
 	public void destroy() {

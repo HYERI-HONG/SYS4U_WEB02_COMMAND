@@ -14,7 +14,6 @@ public class DuplCheckCommand extends AbstractCommand{
 		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
 		String ename = request.getParameter("ename");
 		boolean exists = false;
-		carrierOption = "forward";
 		
 		exists = companyDAOImpl.exists("ENAME/"+ename);
 		request.setAttribute("ajaxResponse", exists? "exists" : "nonexists");

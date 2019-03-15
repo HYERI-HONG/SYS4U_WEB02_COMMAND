@@ -1,5 +1,8 @@
 package com.bory.company.servlet;
 
+import java.io.IOException;
+import java.sql.Connection;
+
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletConfig;
@@ -12,7 +15,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.bory.company.command.Command;
 import com.bory.company.command.CommandFactory;
-import exception.CommandExecutionException;
+import com.bory.company.exception.CommandExecutionException;
+import com.bory.company.exception.IllegalParameterException;
 
 public class CompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = -291178543531058657L;
@@ -49,17 +53,27 @@ public class CompanyServlet extends HttpServlet {
 		
 		Command command = commandFactory.createCommand(uri);
 		if(command != null) {
-			viewName = executeCommand(command, request, response);
+			try {
+				viewName = executeCommand(command, request, response);
+				}catch(IllegalParameterException ipe) {
+					request.setAttribute("exception", ipe);
+					viewName = "/WEB-INF/jsp/error/400.jsp";
+				}
 		}
-		new Carrier(request, response).carryTo(command.getCarrierOption(), viewName);
-	
+		try {
+			request.getRequestDispatcher(viewName).forward(request, response);
+		} catch (IOException e) {
+			throw new ServletException(e);
+		}
 	}
 	
 	private String executeCommand(Command command, HttpServletRequest request, HttpServletResponse response) {
 		
 		String viewName = "/WEB-INF/view/error/500.jsp";
 		try {
-			command.setConnection(dataSource.getConnection());
+			Connection connection = dataSource.getConnection();
+			//connection.setAutoCommit(false);
+			command.setConnection(connection);
 			viewName = command.execute(request, response);
 		} catch (Exception e) {
 			throw new CommandExecutionException(e);

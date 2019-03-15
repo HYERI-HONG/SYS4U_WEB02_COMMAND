@@ -9,8 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import com.bory.company.dto.Employee;
 import com.bory.company.dto.Pagination;
-
-import exception.DAOException;
+import com.bory.company.exception.DAOException;
 
 import static com.bory.company.dao.DTOFactory.*;
 import static com.bory.company.dao.DataResourceCloser.*;
