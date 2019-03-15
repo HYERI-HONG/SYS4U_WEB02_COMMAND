@@ -36,14 +36,14 @@
 				</tr>
 				<c:forEach items='${list}' var='employee'>
 					<tr>
-						<td><a href ="${context}/empDetail.do?empNo=${employee.empNo}" class="empNo" >${employee.empNo}</a></td>
-						<td>${employee.eName}</td>
+						<td><a href ="${context}/empDetail.do?empno=${employee.empno}" class="empno" >${employee.empno}</a></td>
+						<td>${employee.ename}</td>
 						<td>${employee.job}</td>
 						<td>${employee.mgr}</td>
-						<td>${employee.hireDate}</td>
+						<td>${employee.hiredate}</td>
 						<td>${employee.sal}</td>
 						<td>${employee.comm}</td>
-						<td>${employee.deptNo}</td>
+						<td>${employee.deptno}</td>
 					</tr>
 				</c:forEach>
 				<tr>

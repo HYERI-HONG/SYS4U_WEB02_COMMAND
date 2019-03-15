@@ -35,3 +35,6 @@
 1552614702104	Rename local variable 'moveViewName'
 1552615302078	Copy compilation unit
 1552615388147	Delete element
+1552627348158	Rename resource 'empUpdate.jsp'
+1552638865175	Rename resource 'empAdd.js'
+1552639652574	Rename field 'empNo'

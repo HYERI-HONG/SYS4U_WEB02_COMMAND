@@ -20,12 +20,12 @@
 					</tr>
 					<tr>
 						<td>이 름</td>
-						<td><input type="text" name="eName" id="eName"/>
+						<td><input type="text" name="ename" id="ename"/>
 						<input type="button" id="duplCheckBtn" value="확인"></td>
 					</tr>
 					<tr>
 						<td>입 사 일</td>
-						<td><input type="date" name="hireDate" min="2019-01-01"/></td>
+						<td><input type="date" name="hiredate" min="2019-01-01"/></td>
 					</tr>
 					<tr>
 						<td>연 봉</td>
@@ -42,10 +42,10 @@
 					<tr>
 						<td>부 서</td>
 						<td>
-						<input type="radio" name="deptNo" value="10" /> Accounting 
-						<input type="radio" name="deptNo" value="20" /> Research 
-						<input type="radio" name="deptNo" value="30" />Sales 
-						<input type="radio" name="deptNo" value="40" /> Operations</td>
+						<input type="radio" name="deptno" value="10" /> Accounting 
+						<input type="radio" name="deptno" value="20" /> Research 
+						<input type="radio" name="deptno" value="30" />Sales 
+						<input type="radio" name="deptno" value="40" /> Operations</td>
 					</tr>
 					<tr>
 						<td>직 책</td>

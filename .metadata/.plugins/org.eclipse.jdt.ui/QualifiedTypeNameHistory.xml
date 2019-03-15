@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="com.bory.company.domain.EmployeeBean"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServletRequest"/>
 <fullyQualifiedTypeName name="com.bory.company.command.Command"/>
-<fullyQualifiedTypeName name="java.sql.Connection"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -21,10 +20,15 @@
 <fullyQualifiedTypeName name="com.bory.company.dao.CompanyDAOImpl"/>
 <fullyQualifiedTypeName name="exception.DAOException"/>
 <fullyQualifiedTypeName name="java.sql.SQLException"/>
-<fullyQualifiedTypeName name="com.bory.company.pool.Constants"/>
 <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 <fullyQualifiedTypeName name="java.sql.ResultSet"/>
 <fullyQualifiedTypeName name="com.bory.company.dao.QueryFactory"/>
 <fullyQualifiedTypeName name="com.bory.company.dto.Employee"/>
 <fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="com.bory.company.exception.IllegalParameterException"/>
+<fullyQualifiedTypeName name="java.io.IOException"/>
+<fullyQualifiedTypeName name="com.bory.company.pool.Constants"/>
+<fullyQualifiedTypeName name="com.bory.company.exception.FailToCloseTheResourceException"/>
+<fullyQualifiedTypeName name="com.bory.company.exception.CommandExecutionException"/>
+<fullyQualifiedTypeName name="java.sql.Connection"/>
 </qualifiedTypeNameHistroy>

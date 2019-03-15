@@ -12,7 +12,7 @@ public class UpdateCommand extends AbstractCommand {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-		String redirectUrl = "/company/empDetail.do?empNo=" + request.getParameter("empNo");
+		String redirectUrl = "/company/empDetail.do?empno=" + request.getParameter("empno");
 
 		Employee employee = new Employee();
 		employee.create(request);
@@ -26,7 +26,7 @@ public class UpdateCommand extends AbstractCommand {
 		//실패 했을 경우
 		//conn.rollback();
 		
-		throw new CommandExecutionException("Employee data[" + employee.geteName() + "] not updated.");
+		throw new CommandExecutionException("Employee data[" + employee.getEname() + "] not updated.");
 	}
 
 }

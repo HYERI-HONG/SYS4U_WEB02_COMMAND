@@ -9,16 +9,16 @@ public class Employee implements Serializable {
 
 	private static final long serialVersionUID = -4312910826157323298L;
 
-	private String eName, job;
-	private int empNo, mgr, sal, comm, deptNo;
-	private Date hireDate;
+	private String ename, job;
+	private int empno, mgr, sal, comm, deptno;
+	private Date hiredate;
 
-	public String geteName() {
-		return eName;
+	public String getEname() {
+		return ename;
 	}
 
-	public void seteName(String eName) {
-		this.eName = eName;
+	public void setEname(String ename) {
+		this.ename = ename;
 	}
 
 	public String getJob() {
@@ -29,12 +29,12 @@ public class Employee implements Serializable {
 		this.job = job;
 	}
 
-	public int getEmpNo() {
-		return empNo;
+	public int getEmpno() {
+		return empno;
 	}
 
-	public void setEmpNo(int empNo) {
-		this.empNo = empNo;
+	public void setEmpno(int empno) {
+		this.empno = empno;
 	}
 
 	public int getMgr() {
@@ -61,40 +61,36 @@ public class Employee implements Serializable {
 		this.comm = comm;
 	}
 
-	public int getDeptNo() {
-		return deptNo;
+	public int getDeptno() {
+		return deptno;
 	}
 
-	public void setDeptNo(int deptNo) {
-		this.deptNo = deptNo;
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
 	}
 
-	public Date getHireDate() {
-		return hireDate;
+	public Date getHiredate() {
+		return hiredate;
 	}
 
-	public void setHireDate(Date hireDate) {
-		this.hireDate = hireDate;
+	public void setHiredate(Date hiredate) {
+		this.hiredate = hiredate;
 	}
 
-	public void setHireDate(String hireDate) {
-		this.hireDate = Date.valueOf(hireDate);
-	}
-	
 	@Override
 	public String toString() {
 		
 		return String.format("EmployeeBean [eName= %6s, job= %9s, empNo= %5d, mgr= %5d, sal= %5d"
-				+ ",comm= %4d, deptNo= %2d, hireDate= %10s]", eName,job,empNo,mgr,sal,comm,deptNo,hireDate);
+				+ ",comm= %4d, deptNo= %2d, hireDate= %10s]", ename,job,empno,mgr,sal,comm,deptno,hiredate);
 	} 
 	
 	public void create(HttpServletRequest request) { 
 		
 		this.comm = Integer.parseInt(request.getParameter("comm")); 	
-		this.deptNo = Integer.parseInt(request.getParameter("deptNo"));
-		this.empNo = Integer.parseInt(request.getParameter("empNo"));
-		this.eName = request.getParameter("eName");
-		this.hireDate = java.sql.Date.valueOf(request.getParameter("hireDate"));
+		this.deptno = Integer.parseInt(request.getParameter("deptno"));
+		this.empno = Integer.parseInt(request.getParameter("empno"));
+		this.ename = request.getParameter("ename");
+		this.hiredate = java.sql.Date.valueOf(request.getParameter("hiredate"));
 		this.job = request.getParameter("job");
 		this.mgr = Integer.parseInt(request.getParameter("mgr"));
 		this.sal = Integer.parseInt(request.getParameter("sal"));

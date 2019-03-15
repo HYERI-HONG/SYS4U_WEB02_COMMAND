@@ -13,23 +13,23 @@
 			<table id="empInfo">
 			<tr>
 				<td>사원 번호</td>
-				<td>${employee.empNo}</td>
+				<td>${employee.empno}</td>
 				<td>이       름</td>
-				<td>${employee.eName}</td>
+				<td>${employee.ename}</td>
 			</tr>
 				
 			<tr>
 				<td>직      책</td>
 				<td>${employee.job}</td>
 				<td>부      서</td>
-				<td>${employee.deptNo}</td>
+				<td>${employee.deptno}</td>
 			</tr>
 			
 			<tr>
 				<td>직속 상관</td>
 				<td>${employee.mgr}</td>
 				<td>입사 날짜</td>
-				<td>${employee.hireDate}</td>
+				<td>${employee.hiredate}</td>
 			</tr>
 			
 			<tr>
@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="button" value="사원 정보 수정" onclick="javascript:location.href='${context}/move.do?pageName=empUpdate&empNo=${employee.empNo}';"/>
+					<input type="button" value="사원 정보 수정" onclick="javascript:location.href='${context}/move.do?pageName=empUpdate&empno=${employee.empno}';"/>
 				</td>
 				<td colspan="2" >
 					<input type="button" value="사원 목록으로 돌아가기" onclick="javascript:location.href='${context}/empList.do';">

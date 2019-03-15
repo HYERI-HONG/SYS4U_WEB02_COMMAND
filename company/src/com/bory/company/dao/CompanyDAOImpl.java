@@ -52,8 +52,8 @@ public class CompanyDAOImpl implements CompanyDAO {
 			statement.setInt(2, employee.getMgr());
 			statement.setInt(3, employee.getSal());
 			statement.setInt(4, employee.getComm());
-			statement.setInt(5, employee.getDeptNo());
-			statement.setInt(6, employee.getEmpNo());
+			statement.setInt(5, employee.getDeptno());
+			statement.setInt(6, employee.getEmpno());
 
 			successed = statement.executeUpdate();
 
@@ -121,14 +121,14 @@ public class CompanyDAOImpl implements CompanyDAO {
 	}
 
 	@Override
-	public Employee findOne(int empNo) {
+	public Employee findOne(int empno) {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		Employee employee = new Employee();
 
 		try {
 			statement = connection.prepareStatement(QueryFactory.getQuery("one"));
-			statement.setInt(1, empNo);
+			statement.setInt(1, empno);
 			rs = statement.executeQuery();
 
 			while (rs.next()) {

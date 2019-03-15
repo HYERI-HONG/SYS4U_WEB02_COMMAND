@@ -14,7 +14,7 @@ public class DetailCommand extends AbstractCommand {
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
 		CompanyDAOImpl companyDAOImpl = new CompanyDAOImpl(connection);
-		Employee employee = companyDAOImpl.findOne(Integer.parseInt(request.getParameter("empNo")));
+		Employee employee = companyDAOImpl.findOne(Integer.parseInt(request.getParameter("empno")));
 		request.setAttribute("employee", employee);
 		
 		return FOWARD_URL;

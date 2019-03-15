@@ -12,7 +12,7 @@ public class AddCommand extends AbstractCommand{
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		
-		String redirectUrl = "/company/empDetail.do?empNo="+request.getParameter("empNo");
+		String redirectUrl = "/company/empDetail.do?empno="+request.getParameter("empNo");
 		
 		Employee employee = new Employee();
 		employee.create(request);	

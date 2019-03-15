@@ -10,7 +10,7 @@ public interface CompanyDAO {
 	public int update(Employee employee);
 	public List<Employee> findAll(Pagination page);
 	public List<Employee> findSome(String option, Pagination page);
-	public Employee findOne(int empNo);
+	public Employee findOne(int empno);
 	public int countAll();
 	public int countSome(String option);
 	public boolean exists(String option);

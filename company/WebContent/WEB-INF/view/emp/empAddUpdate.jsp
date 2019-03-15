@@ -4,54 +4,39 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>empUpdate</title>
-	<script>
-	var deptNo = document.getElementById('deptNo');
-	var job = document.getElementById('job');
-	
-	for(var i=0; i<deptNo.options.length; i++){
-		if(deptNo.options[i].value==='${employ.deptNo}'){
-			deptNo.options[i].setAttribute("selected","selected");
-		}
-	}
-	for(var j=0; j<job.options.length; j++){
-		if(job.options[j].value==='${employ.job}'){
-			job.options[j].setAttribute("selected","selected");
-		}
-	}
-	</script>
+	<script type="text/javascript" src="/company/resources/js/emp/empAddUpdate.js"></script>
 </head>
 <body>
 	<div id="content">
 		<div id="content_update">
-			<h3>사원 정보 수정</h3>
-			<form id="updateForm" action="${context}/empUpdate.do" method="post">
+			<h3>${formName}</h3>
+			<form id="${formType}Form" name="${formType}Form">
 			<table id="updateInfo">
 			<tr>
 				<td>사원 번호</td>
-				<td><input type="text" name ="empNo" value="${employee.empNo}" readonly/></td>
+				<td><input type="text" name ="empno"/></td>
 				<td>이       름</td>
-				<td><input type="text" name ="eName" value="${employee.eName}" readonly/></td>
+				<td><input type="text" name ="ename"/></td>
 			</tr>
 			
 			<tr>
 				<td>직속 상관</td>
-				<td><input type="text" name ="mgr" value="${employee.mgr}"/></td>
+				<td><input type="text" name ="mgr"/></td>
 				<td>입사 날짜</td>
-				<td><input type="date" name ="hireDate" value="${employee.hireDate}" readonly/></td>
+				<td><input type="date" name ="hiredate"/></td>
 			</tr>
 			
 			<tr>
 				<td>연      봉</td>
-				<td><input type="text" name="sal" value="${employee.sal}"/></td>
+				<td><input type="text" name="sal" /></td>
 				<td>상  여  금</td>
-				<td><input type="text" name="comm" value="${employee.comm}"/></td>
+				<td><input type="text" name="comm" /></td>
 			</tr>
 			
 			<tr>
 				<td>부서</td>
 				<td>
-					<select name="deptNo" id="deptNo">
+					<select name="deptno" id="deptno">
 		    			<option value="10" > Accounting</option>
 		    			<option value="20" >Research</option>
 		    			<option value="30" >Sales</option>
@@ -77,5 +62,22 @@
 		</form>
 		</div>
 	</div>
+	<script>
+	var employee = {empno : "${employee.empno}",
+					ename : "${employee.ename}",
+					mgr : "${employee.mgr}",
+					hiredate : "${employee.hiredate}",
+					sal : "${employee.sal}",
+					comm : "${employee.comm}",
+					deptno : "${employ.deptno}",
+					job : "${employ.job}"}
+						
+	if('${formType}'==='update'){
+		update.loadUpdateForm(employee);
+	}else{
+		add.loadAddForm();
+	}
+		
+	</script>
 </body>
 </html>

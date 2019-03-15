@@ -16,7 +16,15 @@ public class MoveCommand extends AbstractCommand{
 		
 		switch(pageName) {
 		case "empUpdate":
-			request.setAttribute("employee", new CompanyDAOImpl(connection).findOne(Integer.parseInt(request.getParameter("empNo"))));
+			request.setAttribute("employee", new CompanyDAOImpl(connection).findOne(Integer.parseInt(request.getParameter("empno"))));
+			request.setAttribute("formType", "update");
+			request.setAttribute("formName", "사원 정보 수정");
+			destinationURL =  FOWARD_URL+"empAddUpdate.jsp";
+			break;
+		case "empAdd":
+			request.setAttribute("formType", "add");
+			request.setAttribute("formName", "신입 사원 등록");
+			destinationURL =  FOWARD_URL+"empAddUpdate.jsp";
 			break;
 		}
 		return destinationURL;

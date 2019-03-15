@@ -13,14 +13,14 @@ public class DTOFactory {
 
 	public static PreparedStatement fromEmployee(PreparedStatement statement, Employee employee) throws SQLException {
 
-		statement.setInt(1, employee.getEmpNo());
-		statement.setString(2, employee.geteName());
+		statement.setInt(1, employee.getEmpno());
+		statement.setString(2, employee.getEname());
 		statement.setString(3, employee.getJob());
 		statement.setInt(4, employee.getMgr());
-		statement.setDate(5, employee.getHireDate());
+		statement.setDate(5, employee.getHiredate());
 		statement.setInt(6, employee.getSal());
 		statement.setInt(7, employee.getComm());
-		statement.setInt(8, employee.getDeptNo());
+		statement.setInt(8, employee.getDeptno());
 
 		return statement;
 

@@ -2,7 +2,7 @@
 	global.onload = function() {
 
 		var duplCheck = function() {
-			var ename = document.getElementById("eName").value;
+			var ename = document.getElementById("ename").value;
 			if (ename === "") {
 				alert("이름을 입력해주세요.");
 				return;
@@ -39,27 +39,66 @@
 		var formSubmit = function() {
 			
 			var checkedEname = localStorage.getItem('checkedEname')
-			var ename = doc.getElementById("eName").value;
-			
-			console.log(checkedEname);
-			console.log(ename);
-			
-			console.log(localStorage.getItem('checked'));
-			
+			var ename = doc.getElementById("ename").value;	
 			
 			if (!(localStorage.getItem('checked') === 'checked' && checkedEname === ename)) {
 				alert("이름 중복 여부를 확인하세요.");
 				return;
 			}
 			var addForm = doc.addForm;
-			console.log(doc.addForm.comm.value);
 			addForm.action = "/company/empAdd.do";
 			addForm.method = "post"
 			addForm.submit();
 		};
 
-		doc.getElementById("duplCheckBtn").onclick = duplCheck;
-		doc.getElementById("addFormSubmitBtn").onclick = formSubmit;
+		//doc.getElementById("duplCheckBtn").onclick = duplCheck;
+		//doc.getElementById("addFormSubmitBtn").onclick = formSubmit;
 	};
 
 }(window, document));
+
+var update = ((global, doc)=>{
+	
+	return {loadUpdateForm : x=>{
+		console.log(x.empno);
+		var updateForm = doc.updateForm;
+		
+		updateForm.empno.value = x.empno;
+		updateForm.ename.value = x.ename;
+		updateForm.mgr.value = x.mgr;
+		updateForm.hiredate.value = x.hiredate;
+		updateForm.sal.value = x.sal;
+		updateForm.comm.value = x.comm;
+		
+		updateForm.empno.readOnly = true;
+		updateForm.ename.readOnly = true;
+		updateForm.hiredate.readOnly = true;
+		
+		
+//		for(var i=0; i<deptno.options.length; i++){
+//			if(deptno.options[i].value===deptno.getAttribute('class')){
+//				deptno.options[i].setAttribute("selected","selected");
+//			}
+//		}
+//		for(var j=0; j<job.options.length; j++){
+//			if(job.options[j].value===job.getAttribute('class')){
+//				job.options[j].setAttribute("selected","selected");
+//			}
+//		}
+//		
+
+		//updateForm.action = "/company/empUpdate.do";
+		//updateForm.method = "post";	
+		//updateForm.submit();
+		
+	}};
+	
+})(window, document);
+
+var add = (function(){
+	
+	return {loadAddForm : x=>{
+		console.log(x+"add");
+	}}
+	
+}());
