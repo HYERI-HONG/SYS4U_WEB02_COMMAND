@@ -20,6 +20,10 @@ public class Pagination implements Serializable{
 	
 	private boolean existPrev;
 	private boolean existNext;
+	
+	public Pagination() {
+		
+	}
 
 	public void calcPage(int pageNum, int count) {	
 		

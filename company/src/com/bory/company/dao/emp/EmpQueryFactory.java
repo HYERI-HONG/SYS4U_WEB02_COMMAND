@@ -15,21 +15,25 @@ public class EmpQueryFactory {
 			query = "UPDATE EMP SET JOB = ?, MGR = ?, SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
 			break;
 		case "one":
-			query = "SELECT ENAME, JOB, EMPNO, MGR, SAL, COMM, DEPTNO, HIREDATE "
-					+ " FROM EMP "
-					+ " WHERE EMPNO = ?";
+			query = "SELECT E.ENAME, E.JOB, E.EMPNO, E.MGR, E.SAL, E.COMM, E.DEPTNO, E.HIREDATE, D.DNAME "
+					+ " FROM EMP E, DEPT D "
+					+ " WHERE E.DEPTNO = D.DEPTNO"
+					+ " AND EMPNO = ?";
 			break;
 		case "all":
-			query = "SELECT T.*" 
-					+ " FROM (SELECT ROWNUM SEQ, E.*"  
-					+ " FROM (SELECT * FROM EMP" 
-					+ " ORDER BY HIREDATE DESC) E"
-					+ " WHERE ROWNUM <= ?) T"  
+			query = "SELECT T.EMPNO, T.ENAME, T.JOB, T.MGR, T.HIREDATE, T.SAL, T.COMM, T.DEPTNO, T.DNAME"
+					+ " FROM (SELECT ROWNUM SEQ, E.*, D.DNAME"
+					+ " FROM (SELECT *"
+					+ " FROM EMP"
+					+ " ORDER BY HIREDATE DESC) E, DEPT D"
+					+ " WHERE E.DEPTNO = D.DEPTNO"
+					+ " AND ROWNUM <= ?) T"
 					+ " WHERE ? <= T.SEQ";
 			break;
 		case "some":
-			query = "SELECT * FROM ("
-					+ " SELECT ROWNUM AS RNUM, E.EMPNO, E.ENAME, E.HIREDATE, E.DEPTNO, E.COMM, E.SAL, E.MGR, E.JOB "
+			query = "SELECT T.EMPNO, T.ENAME, T.JOB, T.MGR, T.HIREDATE, T.SAL, T.COMM, T.DEPTNO, T.DNAME "
+					+ " FROM ("
+					+ " SELECT ROWNUM AS RNUM, E.*, D.DNAME "
 					+ " FROM (SELECT * FROM EMP" 
 					+ " ORDER BY HIREDATE DESC) E, DEPT D" 
 					+ " WHERE E.DEPTNO = D.DEPTNO" 

@@ -19,7 +19,7 @@
 				<option value="empno">사원번호</option>
 				<option value="dname">부서명</option>
 			</select> 
-			<input name="searchWord" type="text" placeholder="검색어 입력" /> 
+			<input name="searchWord" type="text" placeholder="검색어 입력"/> 
 			<input type="button" id="searchButton" value="검색" />
 		</form>	
 		<input id= "context" type="hidden" value="${context}"/>
@@ -30,27 +30,19 @@
 				<tr>
 					<th>사원 번호</th>
 					<th>이 름</th>
-					<th>직 책</th>
-					<th>직속 상관</th>
 					<th>입사 날짜</th>
-					<th>연 봉</th>
-					<th>상여 금액</th>
 					<th>해당 부서</th>
 				</tr>
 				<c:forEach items='${list}' var='employee'>
 					<tr>
 						<td><a href ="${context}/empDetail.do?empno=${employee.empno}" class="empno" style="text-decoration: none; color: black;">${employee.empno}</a></td>
 						<td>${employee.ename}</td>
-						<td>${employee.job}</td>
-						<td>${employee.mgr}</td>
 						<td>${employee.hiredate}</td>
-						<td>${employee.sal}</td>
-						<td>${employee.comm}</td>
-						<td>${employee.deptno}</td>
+						<td>${employee.dname}</td>
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="7" style="height: 50px;">
+					<td colspan="4" style="height: 50px;">
 					<jsp:include page="/WEB-INF/view/common/pagination.jsp" >
 						<jsp:param value="emp" name="domain"/>
 					</jsp:include>

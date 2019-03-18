@@ -10,7 +10,7 @@ var emp = ((global, doc)=>{
 			updateForm.hiredate.value = x.hiredate;
 			updateForm.sal.value = x.sal;
 			updateForm.comm.value = x.comm;
-			
+			 
 			updateForm.empno.readOnly = true;
 			updateForm.ename.readOnly = true;
 			updateForm.hiredate.readOnly = true;

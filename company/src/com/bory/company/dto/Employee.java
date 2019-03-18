@@ -9,7 +9,7 @@ public class Employee implements Serializable {
 
 	private static final long serialVersionUID = -4312910826157323298L;
 
-	private String ename, job;
+	private String ename, job, dname;
 	private int empno, mgr, sal, comm, deptno;
 	private Date hiredate;
 
@@ -77,13 +77,14 @@ public class Employee implements Serializable {
 		this.hiredate = hiredate;
 	}
 
-	@Override
-	public String toString() {
-		
-		return String.format("EmployeeBean [eName= %6s, job= %9s, empNo= %5d, mgr= %5d, sal= %5d"
-				+ ",comm= %4d, deptNo= %2d, hireDate= %10s]", ename,job,empno,mgr,sal,comm,deptno,hiredate);
-	} 
-	
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
+	}
+
 	public void create(HttpServletRequest request) { 
 		
 		this.comm = Integer.parseInt(request.getParameter("comm")); 	

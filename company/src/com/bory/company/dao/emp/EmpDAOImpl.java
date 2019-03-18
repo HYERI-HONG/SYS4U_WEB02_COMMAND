@@ -66,12 +66,11 @@ public class EmpDAOImpl implements EmpDAO {
 	public List<Employee> findAll(Pagination page) {
 
 		List<Employee> list = new ArrayList<Employee>();
-
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 
 		try {
-
+			
 			statement = connection.prepareStatement(EmpQueryFactory.getQuery("all"));
 			statement.setInt(1, page.getEndRow());
 			statement.setInt(2, page.getBeginRow());

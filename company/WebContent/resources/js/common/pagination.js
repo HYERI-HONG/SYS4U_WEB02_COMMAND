@@ -1,5 +1,5 @@
 var pagination = ((global,doc)=>{
-	
+	 
 	return {changePage : x=>{
 		var pageNum = document.querySelectorAll('.changePage');
 		for(var i=0; i<pageNum.length; i++){
