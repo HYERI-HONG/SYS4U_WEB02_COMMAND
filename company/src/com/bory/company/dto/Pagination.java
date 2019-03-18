@@ -30,7 +30,7 @@ public class Pagination implements Serializable{
 		this.endPage = ((beginPage+BLOCK_SIZE-1)>lastPage)? lastPage:beginPage+BLOCK_SIZE-1;
 		
 		this.beginRow = (PAGE_ROW*pageNum)-(PAGE_ROW-1);
-		this.endRow = pageNum ==lastPage? PAGE_ROW*pageNum-PAGE_ROW+(count%PAGE_ROW):PAGE_ROW*pageNum;
+		this.endRow = pageNum ==lastPage? count:PAGE_ROW*pageNum;
 		
 	    this.prevBlock = beginPage - BLOCK_SIZE;
         this.nextBlock = beginPage + BLOCK_SIZE;

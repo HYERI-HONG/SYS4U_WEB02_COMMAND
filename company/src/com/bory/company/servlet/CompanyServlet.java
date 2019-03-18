@@ -13,8 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.bory.company.command.Command;
-import com.bory.company.command.CommandFactory;
+
+import com.bory.company.command.common.Command;
+import com.bory.company.command.common.CommandFactory;
 import com.bory.company.exception.CommandExecutionException;
 import com.bory.company.exception.IllegalParameterException;
 
@@ -32,6 +33,7 @@ public class CompanyServlet extends HttpServlet {
 		try {
 			this.dataSource = (DataSource)new InitialContext().lookup("java:comp/env/jdbc/orcl"); 
 		} catch (NamingException e) {
+			LOGGER.error("",e);
 			throw new ServletException(e);
 		}
 		
@@ -43,9 +45,9 @@ public class CompanyServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException{
 		
-		request.getSession().setAttribute("context",request.getContextPath());
-		request.getSession().setAttribute("js",request.getContextPath()+"/resources/js");
-		request.getSession().setAttribute("css",request.getContextPath()+"/resources/css");
+		request.setAttribute("context",request.getContextPath());
+		request.setAttribute("js",request.getContextPath()+"/resources/js");
+		request.setAttribute("css",request.getContextPath()+"/resources/css");
 	
 		
 		String uri = request.getRequestURI();

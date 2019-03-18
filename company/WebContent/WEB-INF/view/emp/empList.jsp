@@ -1,42 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 	<title>EmployeeList</title>
+	<script type="text/javascript" src="${context}/resources/js/emp/empList.js" ></script>
 </head>
 <body>
-	<h3>»ç¿ø ¸ñ·Ï</h3>
+	<h3>ì‚¬ì› ëª©ë¡</h3>
 	<div id="content">
 		<div id="content_search">
-		<form action="${context}/empList.do" method="post">
+		<form  name="searchForm" style="display: inline;">
 			<select name="searchOption">
-				<option value="all">ÀüÃ¼ Á¶È¸</option>
-				<option value="ename">ÀÌ¸§</option>
-				<option value="empno">»ç¿ø¹øÈ£</option>
-				<option value="dname">ºÎ¼­¸í</option>
+				<option value="all">ì „ì²´ ì¡°íšŒ</option>
+				<option value="ename">ì´ë¦„</option>
+				<option value="empno">ì‚¬ì›ë²ˆí˜¸</option>
+				<option value="dname">ë¶€ì„œëª…</option>
 			</select> 
-			<input name="searchWord" type="text" placeholder="°Ë»ö¾î ÀÔ·Â" /> 
-			<input type="submit" id="searchButton" value="°Ë»ö" />
-		</form>		
+			<input name="searchWord" type="text" placeholder="ê²€ìƒ‰ì–´ ì…ë ¥" /> 
+			<input type="button" id="searchButton" value="ê²€ìƒ‰" />
+		</form>	
+		<input id= "context" type="hidden" value="${context}"/>
+		<input id="addBtn" type="button" value="ì‚¬ì› ë“±ë¡" />
 		</div>
 		<div id="content_list">
 			<table id="employee_list">
 				<tr>
-					<th>»ç¿ø ¹øÈ£</th>
-					<th>ÀÌ ¸§</th>
-					<th>Á÷ Ã¥</th>
-					<th>Á÷¼Ó »ó°ü</th>
-					<th>ÀÔ»ç ³¯Â¥</th>
-					<th>¿¬ ºÀ</th>
-					<th>»ó¿© ±İ¾×</th>
-					<th>ÇØ´ç ºÎ¼­</th>
+					<th>ì‚¬ì› ë²ˆí˜¸</th>
+					<th>ì´ ë¦„</th>
+					<th>ì§ ì±…</th>
+					<th>ì§ì† ìƒê´€</th>
+					<th>ì…ì‚¬ ë‚ ì§œ</th>
+					<th>ì—° ë´‰</th>
+					<th>ìƒì—¬ ê¸ˆì•¡</th>
+					<th>í•´ë‹¹ ë¶€ì„œ</th>
 				</tr>
 				<c:forEach items='${list}' var='employee'>
 					<tr>
-						<td><a href ="${context}/empDetail.do?empno=${employee.empno}" class="empno" >${employee.empno}</a></td>
+						<td><a href ="${context}/empDetail.do?empno=${employee.empno}" class="empno" style="text-decoration: none; color: black;">${employee.empno}</a></td>
 						<td>${employee.ename}</td>
 						<td>${employee.job}</td>
 						<td>${employee.mgr}</td>
@@ -47,46 +50,14 @@
 					</tr>
 				</c:forEach>
 				<tr>
-					<td>
-						<h4>Á¶È¸ °á°ú : ${page.count}</h4>
-					</td>
-					<td colspan="5">
-						<ul class="pageBox" style="display: inline; list-style: none;">
-						<c:if test="${page.existPrev}">
-							<li style="display: inline" id="${page.prevBlock}" class="changePage">¢¸ÀÌÀü </li>
-						</c:if>
-						<c:forEach begin="${page.beginPage}" end="${page.endPage}" step="1" varStatus="i">
-							<li style="display: inline">
-								<a class="changePage" id="${i.index}">${i.index}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${page.existNext}">
-							<li style="display: inline" id="${page.nextBlock}" class="changePage"> ´ÙÀ½¢º</li>
-						</c:if>
-						</ul>
+					<td colspan="7" style="height: 50px;">
+					<jsp:include page="/WEB-INF/view/common/pagination.jsp" >
+						<jsp:param value="emp" name="domain"/>
+					</jsp:include>
 					</td>				
-					<td>
-						<input id="addBtn" type="button" value="»ç¿ø µî·Ï" />
-						
-					</td>
 				<tr>
-			
 			</table>
 		</div>
 	</div>
-	<script type="text/javascript">
-		
-		document.getElementById('addBtn').addEventListener('click',function(){
-			location.href = "<%=application.getContextPath()%>/move.do?pageName=empAdd"
-		});
-		
-		var pageNum = document.querySelectorAll('.changePage');
-		for(var i=0; i<pageNum.length; i++){
-			pageNum[i].addEventListener('click',function(){
-				var pageNum = this.getAttribute('id');
-				location.href ="<%=application.getContextPath()%>/empList.do?pageNum="+pageNum+"&searchWord=${searchWord}&searchOption=${searchOption}";
-			});
-		}
-	</script>
 </body>
 </html>
