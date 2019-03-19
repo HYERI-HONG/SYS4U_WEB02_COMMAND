@@ -1,10 +1,11 @@
 package com.bory.company.command.emp;
 
-import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import com.bory.company.command.common.AbstractCommand;
 import com.bory.company.dao.emp.EmpDAO;
@@ -37,7 +38,8 @@ public class EmpListCommand extends AbstractCommand {
 
 		request.setAttribute("page", page);
 		request.setAttribute("list", list);
-
+		
 		return FOWARD_URL;
+		
 	}
 }

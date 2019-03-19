@@ -33,6 +33,9 @@ public class EmpMoveCommand extends AbstractCommand{
 			destinationURL.delete(0, destinationURL.length());
 			destinationURL.append(FOWARD_URL).append("empAddUpdate.jsp");
 			break;
+		case "empList":
+			request.setAttribute("searchOption", "empno");
+			request.setAttribute("searchWord", "");
 		}
 		return destinationURL.toString();
 	}
