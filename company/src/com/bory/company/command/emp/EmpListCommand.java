@@ -19,51 +19,18 @@ public class EmpListCommand extends AbstractCommand {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 
-		List<Employee> list = new ArrayList<>();
-		EmpDAO empDAO = new EmpDAOImpl(connection);
-
 		String pageNum = request.getParameter("pageNum");
 		int pn = (pageNum == null) ? 1 : Integer.parseInt(pageNum);
 	
-		String searchWord = request.getParameter("searchWord");
-		String searchOption = request.getParameter("searchOption");
-
-		String check = "all";
-		if (searchOption == null) {
-			check = "all";
-		}else if (searchOption.equals("ename") || searchOption.equals("dname")) {
-			check = "some";
-		} else if (searchOption.equals("empno")) {
-			check = "one";
-		}
+		String searchOption = getParameter(request,"searchOption","EMPNO");
+		String searchWord = getParameter(request,"searchWord","");
 		
+		EmpDAO empDAO = new EmpDAOImpl(connection);
+		Pagination page = new Pagination(3 ,5);
 		
-		Pagination page = new Pagination();
-		int count;
-
-
-		switch (check) {
-		case "one":
-			//검색어로 숫자가 아닌 문자열을 입력한 경우 처리 방법?
-			Employee employee = empDAO.findOne(Integer.parseInt(searchWord));
-			list.add(employee);
-			count = 1;
-			if(employee == null) {
-				count = 0;
-			}
-			page.calcPage(1, count);
-			
-			break;
-		case "some":
-			count = empDAO.countSome(searchOption + "/" + searchWord);
-			page.calcPage(pn, count);
-			list = empDAO.findSome(searchOption + "/" + searchWord, page);
-			break;
-		case "all":
-			page.calcPage(pn, empDAO.countAll());
-			list = empDAO.findAll(page);
-			break;
-		}
+		int count = empDAO.count(searchOption,searchWord);
+		page.calcPage(pn, count);
+		List<Employee> list = empDAO.find(searchOption,searchWord, page);
 		
 		request.setAttribute("searchOption", searchOption);
 		request.setAttribute("searchWord", searchWord);

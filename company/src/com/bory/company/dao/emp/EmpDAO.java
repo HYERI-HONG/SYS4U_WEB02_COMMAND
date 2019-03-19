@@ -8,10 +8,8 @@ public interface EmpDAO {
 	
 	public int insert(Employee employee);
 	public int update(Employee employee);
-	public List<Employee> findAll(Pagination page);
-	public List<Employee> findSome(String option, Pagination page);
-	public Employee findOne(int empno);
-	public int countAll();
-	public int countSome(String option);
-	public boolean exists(String option);
+	public List<Employee> find(String column,String value, Pagination page);
+	public Employee findOne(int value);
+	public int count(String column,String value);
+	public boolean exists(String column,String value);
 }

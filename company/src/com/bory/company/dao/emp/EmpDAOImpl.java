@@ -28,7 +28,7 @@ public class EmpDAOImpl implements EmpDAO {
 		int successed;
 
 		try {
-			statement = connection.prepareStatement(EmpQueryFactory.getQuery("insert"));
+			statement = connection.prepareStatement(EmpQueryFactory.getQuery("insert",""));
 			successed = fromEmployee(statement, employee).executeUpdate();
 		} catch (Exception e) {
 			successed = 0;
@@ -41,11 +41,12 @@ public class EmpDAOImpl implements EmpDAO {
 
 	@Override
 	public int update(Employee employee) {
-		
+
 		PreparedStatement statement = null;
-		int successed = 0;;
-		try{
-			statement = connection.prepareStatement(EmpQueryFactory.getQuery("update"));
+		int successed = 0;
+		;
+		try {
+			statement = connection.prepareStatement(EmpQueryFactory.getQuery("update",""));
 
 			statement.setString(1, employee.getJob());
 			statement.setInt(2, employee.getMgr());
@@ -63,17 +64,18 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public List<Employee> findAll(Pagination page) {
+	public List<Employee> find(String column,String value, Pagination page) {
 
-		List<Employee> list = new ArrayList<Employee>();
+		List<Employee> list = new ArrayList<>();
 		PreparedStatement statement = null;
 		ResultSet rs = null;
-
-		try {
 			
-			statement = connection.prepareStatement(EmpQueryFactory.getQuery("all"));
-			statement.setInt(1, page.getEndRow());
-			statement.setInt(2, page.getBeginRow());
+		try {
+			statement = connection.prepareStatement(EmpQueryFactory.getQuery("find",column));
+			statement.setString(1, value);
+			statement.setInt(2, page.getEndRow());
+			statement.setInt(3, page.getBeginRow());
+
 			rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -90,44 +92,14 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public List<Employee> findSome(String findOption, Pagination page) {
-		
-		String[] option = findOption.split("/");
-		List<Employee> list = new ArrayList<>();
-		PreparedStatement statement = null;
-		ResultSet rs = null;
-		
-		try {
-			String sql = String.format(EmpQueryFactory.getQuery("some"), option[0]);
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, option[1]);
-			statement.setInt(2, page.getEndRow());
-			statement.setInt(3, page.getBeginRow());
-			
-			rs = statement.executeQuery();
-			
-			while(rs.next()) {
-				list.add(fromResultSet(rs, Employee.class));
-			}
-			
-		}catch(Exception e) {
-			throw new DAOException(e);
-		}finally {
-			close(rs, statement);
-		}
-		
-		return list;
-	}
-
-	@Override
-	public Employee findOne(int empno) {
+	public Employee findOne(int value) {
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		Employee employee = new Employee();
 
 		try {
-			statement = connection.prepareStatement(EmpQueryFactory.getQuery("one"));
-			statement.setInt(1, empno);
+			statement = connection.prepareStatement(EmpQueryFactory.getQuery("findOne",""));
+			statement.setInt(1, value);
 			rs = statement.executeQuery();
 
 			while (rs.next()) {
@@ -143,19 +115,16 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public int countSome(String option) {
-		
+	public int count(String column,String value) {
+
 		PreparedStatement statement = null;
 		ResultSet rs = null;
-		String searchOption = option.split("/")[0];
-		String searchWord = option.split("/")[1];
 
-		try { 
-			String sql = String.format(EmpQueryFactory.getQuery("countsome"), searchOption);
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, searchWord);
+		try {
+			statement = connection.prepareStatement(EmpQueryFactory.getQuery("count",column));
+			statement.setString(1, value);
 			rs = statement.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				return rs.getInt("NUM");
 			}
 
@@ -168,49 +137,27 @@ public class EmpDAOImpl implements EmpDAO {
 	}
 
 	@Override
-	public int countAll() {
-		
-		ResultSet rs = null;
+	public boolean exists(String column,String value) {
 
-		try { 
-			rs = connection.prepareStatement(EmpQueryFactory.getQuery("countall")).executeQuery();
-			if(rs.next()) {
-				return rs.getInt("NUM");
-			}
-
-		} catch (SQLException e) {
-			throw new DAOException(e);
-		} finally {
-			close(rs);
-		}
-		return 0;
-	
-	}
-
-	@Override
-	public boolean exists(String option) {
-		
 		PreparedStatement statement = null;
 		ResultSet rs = null;
 		boolean exists = false;
-		
+
 		try {
-			String sql = String.format(EmpQueryFactory.getQuery("exists"), option.split("/")[0]);
-			statement = connection.prepareStatement(sql);
-			statement.setString(1, option.split("/")[1]);
+			String query = EmpQueryFactory.getQuery("exists",column);
+			statement = connection.prepareStatement(query);
+			statement.setString(1, value);
 			rs = statement.executeQuery();
 
 			exists = rs.next();
-			
+
 		} catch (SQLException e) {
 			throw new DAOException(e);
-		}finally {
+		} finally {
 			close(rs, statement);
 		}
-		
+
 		return exists;
 	}
-
-	
 
 }

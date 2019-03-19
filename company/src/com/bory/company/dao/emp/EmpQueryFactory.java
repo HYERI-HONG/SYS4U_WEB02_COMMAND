@@ -2,60 +2,43 @@ package com.bory.company.dao.emp;
 
 public class EmpQueryFactory {
 	
-	public static String getQuery(String option) {
+	public static String getQuery(String option, String column) {
 
-		String query = "";
+		StringBuilder query = new StringBuilder();
 		
 		switch (option) {
 		case "insert":
-			query = "INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)" 
-					+ " VALUES(?,?,?,?,?,?,?,?)";
+			query.append("INSERT INTO EMP(EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)")
+				 .append(" VALUES(?,?,?,?,?,?,?,?)");
 			break;
 		case "update":
-			query = "UPDATE EMP SET JOB = ?, MGR = ?, SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?";
+			query.append("UPDATE EMP SET JOB = ?, MGR = ?, SAL = ?, COMM = ?, DEPTNO = ? WHERE EMPNO = ?");
 			break;
-		case "one":
-			query = "SELECT E.ENAME, E.JOB, E.EMPNO, E.MGR, E.SAL, E.COMM, E.DEPTNO, E.HIREDATE, D.DNAME "
-					+ " FROM EMP E, DEPT D "
-					+ " WHERE E.DEPTNO = D.DEPTNO"
-					+ " AND EMPNO = ?";
+		case "find":
+			query.append("SELECT T.EMPNO, T.ENAME, T.JOB, T.MGR, T.HIREDATE, T.SAL, T.COMM, T.DEPTNO, T.DNAME ")
+			     .append(" FROM (")
+			     .append(" SELECT ROWNUM AS RNUM, E.*, D.DNAME ")
+			     .append(" FROM (SELECT * FROM EMP")
+			     .append(" ORDER BY HIREDATE DESC) E, DEPT D")
+			     .append(" WHERE E.DEPTNO = D.DEPTNO")
+			     .append(" AND "+column+" LIKE '%' || UPPER(?) || '%' ")
+			     .append(" AND ROWNUM <= ?) T").append(" WHERE ? <= T.RNUM");
 			break;
-		case "all":
-			query = "SELECT T.EMPNO, T.ENAME, T.JOB, T.MGR, T.HIREDATE, T.SAL, T.COMM, T.DEPTNO, T.DNAME"
-					+ " FROM (SELECT ROWNUM SEQ, E.*, D.DNAME"
-					+ " FROM (SELECT *"
-					+ " FROM EMP"
-					+ " ORDER BY HIREDATE DESC) E, DEPT D"
-					+ " WHERE E.DEPTNO = D.DEPTNO"
-					+ " AND ROWNUM <= ?) T"
-					+ " WHERE ? <= T.SEQ";
+		case "findOne":
+			query.append("SELECT ENAME, JOB, EMPNO, MGR, SAL, COMM, DEPTNO, HIREDATE ")
+				 .append(" FROM EMP ")
+				 .append(" WHERE EMPNO = ?");
 			break;
-		case "some":
-			query = "SELECT T.EMPNO, T.ENAME, T.JOB, T.MGR, T.HIREDATE, T.SAL, T.COMM, T.DEPTNO, T.DNAME "
-					+ " FROM ("
-					+ " SELECT ROWNUM AS RNUM, E.*, D.DNAME "
-					+ " FROM (SELECT * FROM EMP" 
-					+ " ORDER BY HIREDATE DESC) E, DEPT D" 
-					+ " WHERE E.DEPTNO = D.DEPTNO" 
-					+ " AND %s LIKE ? "
-					+ " AND ROWNUM <= ?) T" 
-					+ " WHERE ? <= T.RNUM";
-			break;
-		case "countsome":
-			query = "SELECT COUNT(*) AS NUM" + 
-					" FROM EMP E, DEPT D" + 
-					" WHERE E.DEPTNO = D.DEPTNO" + 
-					" AND %s LIKE ?";
-			break;
-		case "countall":
-			query = "SELECT COUNT(1) AS NUM" + 
-					" FROM EMP";
+		case "count":
+			query.append("SELECT COUNT(*) AS NUM")
+				 .append(" FROM EMP E, DEPT D")
+				 .append(" WHERE E.DEPTNO = D.DEPTNO")
+				 .append(" AND "+column+" LIKE '%' || UPPER(?) || '%' ");
 			break;
 		case "exists":
-			query = "SELECT 1 FROM DUAL WHERE EXISTS (SELECT 1 FROM EMP WHERE %s = ?)";
+			query.append("SELECT 1 FROM DUAL WHERE EXISTS (SELECT 1 FROM EMP WHERE "+column+" = ?)");
 			break;
-			
 		}
-		return query;
+		return query.toString();
 	}
 }

@@ -17,7 +17,7 @@ public class EmpDuplCheckCommand extends AbstractCommand{
 		String ename = request.getParameter("ename");
 		boolean exists = false;
 		
-		exists = companyDAOImpl.exists("ENAME/"+ename);
+		exists = companyDAOImpl.exists("ENAME", ename);
 		request.setAttribute("ajaxResponse", exists? "exists" : "nonexists");
 		
 		return Constants.AJAX_VIEW;

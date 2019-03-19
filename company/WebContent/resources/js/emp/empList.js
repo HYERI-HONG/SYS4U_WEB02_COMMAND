@@ -2,6 +2,7 @@
 	global.onload = function(){
 		
 		var context = doc.getElementById('context').value;
+	
 		
 		var getParameter = function (name){
 			   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(global.location.search)) {
@@ -18,7 +19,7 @@
 			
 			var searchForm = doc.searchForm;
 			
-			if(searchForm.searchOption.value !== 'all' && searchForm.searchWord.value === ''){
+			if( searchForm.searchWord.value === ''){
 				alert("검색어를 입력하세요");
 			}else{
 				

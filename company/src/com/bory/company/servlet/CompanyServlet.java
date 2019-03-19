@@ -23,7 +23,6 @@ public class CompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = -291178543531058657L;
 	private static final Logger LOGGER = LoggerFactory.getLogger(CompanyServlet.class);
 	
-	//servlet이 필드를 가지고 있는것은 좋지 않다.
 	private CommandFactory commandFactory;
 	private DataSource dataSource;
 
@@ -80,7 +79,6 @@ public class CompanyServlet extends HttpServlet {
 			viewName = command.execute(request, response);
 		} catch (Exception e) {
 			throw new CommandExecutionException(e);
-			//IllegalArgumentException
 		}finally {
 			command.destroy();
 		}

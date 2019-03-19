@@ -22,7 +22,7 @@ public class DeptListCommand extends AbstractCommand {
 		String pageNum = request.getParameter("pageNum");
 		int pn = (pageNum == null) ? 1 : Integer.parseInt(pageNum);
 		
-		Pagination page = new Pagination();
+		Pagination page = new Pagination(2,2);
 		page.calcPage(pn, deptDAOImpl.count());
 		list = deptDAOImpl.findAll(page);
 		
