@@ -32,11 +32,8 @@
 				<td>${employee.comm}</td>
 			</tr>
 			<tr>
-				<td><input type="button" value="사원 정보 수정"
-					onclick="javascript:location.href='${context}/move.do?pageName=empUpdate&empno=${employee.empno}';" />
-				</td>
-				<td colspan="2"><input type="button" value="사원 목록으로 돌아가기"
-					onclick="javascript:location.href='${context}/empList.do';">
+				<td colspan="4"><input type="button" value="사원 목록으로 돌아가기"
+					onclick="javascript:location.href='${context}/move.do?pageName=empList';">
 				</td>
 			</tr>
 		</table>

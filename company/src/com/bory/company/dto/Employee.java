@@ -84,6 +84,14 @@ public class Employee implements Serializable {
 	public void setDname(String dname) {
 		this.dname = dname;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "Employee [ename=" + ename + ", job=" + job + ", dname=" + dname + ", empno=" + empno + ", mgr=" + mgr
+				+ ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + ", hiredate=" + hiredate + "]";
+	}
 
 	public void create(HttpServletRequest request) { 
 		

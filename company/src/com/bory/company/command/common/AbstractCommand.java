@@ -14,7 +14,7 @@ public abstract class AbstractCommand implements Command{
 	
 	protected String getParameter(HttpServletRequest req, String name, String defaultValue) {
 		String value = req.getParameter(name);
-		return value == null ? defaultValue : value;
+		return value == null || value.isEmpty()||value.equals("null")? defaultValue : value;
 	}
 	
 	protected int getIntParameter(HttpServletRequest req, String name, String defaultValue) {

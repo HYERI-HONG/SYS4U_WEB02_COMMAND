@@ -25,9 +25,10 @@ public class EmpQueryFactory {
 			     .append(" AND ROWNUM <= ?) T").append(" WHERE ? <= T.RNUM");
 			break;
 		case "findOne":
-			query.append("SELECT ENAME, JOB, EMPNO, MGR, SAL, COMM, DEPTNO, HIREDATE ")
-				 .append(" FROM EMP ")
-				 .append(" WHERE EMPNO = ?");
+			query.append("SELECT E.ENAME, E.JOB, E.EMPNO, E.MGR, E.SAL, E.COMM, E.DEPTNO, E.HIREDATE, D.DNAME")
+				 .append(" FROM EMP E, DEPT D")
+				 .append(" WHERE E.DEPTNO = D.DEPTNO")
+				 .append(" AND E.EMPNO = ?");
 			break;
 		case "count":
 			query.append("SELECT COUNT(*) AS NUM")

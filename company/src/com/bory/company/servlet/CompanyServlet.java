@@ -18,6 +18,7 @@ import com.bory.company.command.common.Command;
 import com.bory.company.command.common.CommandFactory;
 import com.bory.company.exception.CommandExecutionException;
 import com.bory.company.exception.IllegalParameterException;
+import com.bory.company.pool.Constants;
 
 public class CompanyServlet extends HttpServlet {
 	private static final long serialVersionUID = -291178543531058657L;
@@ -71,17 +72,22 @@ public class CompanyServlet extends HttpServlet {
 	
 	private String executeCommand(Command command, HttpServletRequest request, HttpServletResponse response) {
 		
-		String viewName = "/WEB-INF/view/error/500.jsp";
-		try {
-			Connection connection = dataSource.getConnection();
-			//connection.setAutoCommit(false);
-			command.setConnection(connection);
-			viewName = command.execute(request, response);
-		} catch (Exception e) {
-			throw new CommandExecutionException(e);
-		}finally {
-			command.destroy();
-		}
-		return viewName;
+		String viewName = "/WEB-INF/view/error/500.jsp";		
+		boolean isAjaxRequest = "true".equals(request.getHeader("X-XMLHttpRequest"));
+	      try {
+	         command.setConnection(dataSource.getConnection());
+	         viewName = command.execute(request, response);
+	      } catch (Exception e) { 
+	         String jsonResponse = "{\"errorText\" : \"" + e.getMessage() + "\"}";
+	         request.setAttribute("ajaxResponse", jsonResponse);
+	         response.setStatus(500);
+	         LOGGER.error("servletExecuteError", e);
+	      } finally {
+	         command.destroy();
+	      }
+	      if(isAjaxRequest) {
+	         viewName = Constants.AJAX_VIEW;
+	      }
+	      return viewName;
 	}
 }

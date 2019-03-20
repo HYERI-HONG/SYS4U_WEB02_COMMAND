@@ -17,7 +17,6 @@ public class EmpDetailCommand extends AbstractCommand {
 		EmpDAOImpl companyDAOImpl = new EmpDAOImpl(connection);
 		Employee employee = companyDAOImpl.findOne(Integer.parseInt(request.getParameter("empno")));
 		request.setAttribute("employee", employee);
-		
 		return FOWARD_URL;
 	}
 
